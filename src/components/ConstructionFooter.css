@@ -1,0 +1,72 @@
+.construction-container {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.construction-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('../assets/circuit-detailed.jpg');
+  background-size: cover;
+  background-position: center;
+  z-index: -1;
+  opacity: 0.3;
+  mask-image: linear-gradient(to bottom, transparent, black);
+  -webkit-mask-image: linear-gradient(to bottom, transparent, black);
+}
+
+.construction-content {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  z-index: 10;
+}
+
+.construction-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.warning-icon {
+  color: #ffbd2e;
+  filter: drop-shadow(0 0 10px rgba(255, 189, 46, 0.5));
+}
+
+.terminal-box {
+  background: rgba(0, 0, 0, 0.8);
+  border: 1px solid rgba(48, 54, 61, 0.8);
+  border-radius: 8px;
+  padding: 1.5rem;
+  font-family: var(--font-mono);
+  font-size: 1.1rem;
+  color: #e6edf3;
+  text-align: left;
+  min-width: 350px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.terminal-box p {
+  margin-bottom: 0.5rem;
+}
+
+.terminal-box .prompt {
+  color: #8957e5;
+  font-weight: 600;
+}
+
+.blinking-cursor {
+  display: inline-block;
+  color: #4ade80;
+  animation: blink 1s step-end infinite;
+}
