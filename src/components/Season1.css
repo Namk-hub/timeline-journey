@@ -1,0 +1,327 @@
+/* ═══════════════════════════════════════════════
+   SEASON 1 — Clueless but Curious
+   ═══════════════════════════════════════════════ */
+
+.s1-section {
+  position: relative;
+  width: 100%;
+  z-index: 3;
+  overflow: visible;
+}
+
+/* ── HERO LAYOUT ── */
+.s1-hero {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: clamp(3.4rem, 6vw, 6.4rem);
+  padding: 8rem 6% 4rem;
+  min-height: 90vh;
+}
+
+.s1-hero-text {
+  flex: 1;
+  max-width: 58%;
+  padding-top: 4rem;
+  min-width: 0;
+  position: relative;
+  z-index: 2;
+  
+}
+
+.s1-hero-visual {
+  flex: 0 0 auto;
+  width: 35%;
+  max-width: 400px;
+  min-width: 260px;
+  position: sticky;
+  top: 15vh;
+  z-index: 1;
+  margin-left: clamp(1.75rem, 3.5vw, 3.6rem);
+  transform: none;
+}
+
+/* ── TAG / BADGE ── */
+.s1-tag {
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+  margin-bottom: 2rem;
+  opacity: 0;
+}
+
+.s1-tag-label {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: #8fb9ff;
+}
+
+.s1-tag-bracket {
+  color: #6c9ef2;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+}
+
+.s1-title-wrap {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 1rem;
+  isolation: isolate;
+  max-width: 100%;
+  padding-left: 0.6rem;
+}
+
+.s1-title-watermark {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(4.5rem, 11.6vw, 11.2rem);
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: rgba(80, 132, 226, 0.28);
+  line-height: 0.85;
+  user-select: none;
+  pointer-events: none;
+  transform: translateX(-0.02em);
+  white-space: nowrap;
+}
+
+.s1-title-main {
+  position: absolute;
+  left: 1.4rem;
+  top: 59%;
+  transform: translateY(-50%);
+  margin: 0;
+  font-family: var(--font-serif);
+  font-size: clamp(3rem, 7.3vw, 8.3rem);
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  color: #dbeafe;
+  z-index: 2;
+  white-space: nowrap;
+}
+
+.s1-title-script {
+  font-family: var(--font-script);
+  font-size: 1.42em;
+  margin-right: -0.05em;
+  font-weight: 700;
+  color: #93c5fd;
+  display: inline-block;
+}
+
+/* ── SUBTITLE ── */
+.s1-subtitle {
+  font-family: var(--font-serif);
+  font-size: clamp(1rem, 1.45vw, 1.25rem);
+  color: #bfdbfe;
+  line-height: 1.6;
+  max-width: 560px;
+  opacity: 0;
+  position: relative;
+  padding-left: 4.2rem;
+  margin-top: 0.35rem;
+}
+
+.s1-subtitle-line {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 3rem;
+  height: 1px;
+  transform: translateY(-50%);
+  background: linear-gradient(90deg, #60a5fa, rgba(96, 165, 250, 0.05));
+}
+
+/* ═══ FLIPBOOK ═══ */
+.flipbook-container {
+  width: 100%;
+  aspect-ratio: 1;
+}
+
+.flipbook-frame {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid var(--glass-border);
+  background: var(--bg-darker);
+  box-shadow:
+    0 0 40px rgba(47, 129, 247, 0.08),
+    0 20px 60px rgba(0, 0, 0, 0.4);
+}
+
+.flipbook-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+.flipbook-img.active {
+  opacity: 1;
+}
+
+.flipbook-scanlines {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.08) 2px,
+    rgba(0, 0, 0, 0.08) 4px
+  );
+  pointer-events: none;
+  z-index: 2;
+}
+
+.flipbook-glow {
+  position: absolute;
+  inset: 0;
+  border-radius: 16px;
+  box-shadow: inset 0 0 60px rgba(47, 129, 247, 0.08);
+  pointer-events: none;
+  z-index: 3;
+}
+
+/* ═══ NARRATIVE SECTION ═══ */
+.s1-narrative {
+  padding: 1rem 6% 8rem;
+}
+
+.s1-narrative-inner {
+  max-width: 760px;
+  margin: 0;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  box-shadow: none;
+}
+
+/* ── Divider ── */
+.s1-narrative-divider {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.s1-divider-line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--border-color),
+    transparent
+  );
+}
+
+.s1-divider-icon {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: rgba(230, 237, 243, 0.65);
+}
+
+/* ── Narrative lines ── */
+.s1-narrative-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.narrative-line {
+  font-family: var(--font-serif);
+  font-size: clamp(1.06rem, 1.4vw, 1.22rem);
+  color: rgba(230, 237, 243, 0.84);
+  line-height: 1.86;
+  max-width: 620px;
+}
+
+.narrative-highlight {
+  font-size: clamp(1.28rem, 1.95vw, 1.72rem);
+  font-weight: 700;
+  color: var(--text-primary);
+  font-style: normal;
+  position: relative;
+  padding-left: 0;
+  line-height: 1.5;
+}
+
+.narrative-quote {
+  color: rgba(47, 129, 247, 0.85);
+  font-size: 1.2em;
+  font-weight: 600;
+  font-style: normal;
+  opacity: 0.9;
+}
+
+/* ═══ RESPONSIVE ═══ */
+@media (max-width: 900px) {
+  .s1-hero {
+    flex-direction: column;
+    padding: 5rem 5% 3rem;
+    min-height: auto;
+    gap: 2rem;
+  }
+
+  .s1-hero-text {
+    max-width: 100%;
+    padding-top: 2rem;
+  }
+
+  .s1-hero-visual {
+    width: min(86%, 410px);
+    max-width: 360px;
+    position: relative;
+    top: auto;
+    margin: 0 auto;
+    min-width: 0;
+    transform: translateX(0);
+  }
+
+  .s1-title-number {
+    font-size: clamp(5rem, 20vw, 8rem);
+  }
+
+  .s1-title-main {
+    left: 1rem;
+    top: 58%;
+  }
+
+  .s1-narrative {
+    padding: 2rem 5% 5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .s1-hero {
+    padding: 3rem 4% 2rem;
+  }
+
+  .s1-hero-visual {
+    width: 90%;
+  }
+
+  .s1-title-watermark {
+    font-size: clamp(3.1rem, 18vw, 5.3rem);
+  }
+
+  .s1-title-main {
+    left: 0.45rem;
+    top: 57%;
+    font-size: clamp(2.2rem, 12vw, 3.6rem);
+  }
+
+  .s1-narrative {
+    padding: 1.5rem 4% 4rem;
+  }
+}

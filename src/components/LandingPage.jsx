@@ -1,12 +1,29 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { ChevronDown, Code, BrainCircuit, Bug } from 'lucide-react';
+import Particles from './ui/Particles';
 import './LandingPage.css';
 
 export default function LandingPage() {
   return (
     <div className="landing-container">
-      <div className="landing-background"></div>
+      <div className="landing-background">
+        <div className="landing-particles-wrap">
+          <Particles
+            particleCount={390}
+            particleSpread={7}
+            speed={0.28}
+            particleColors={['#ffffff', '#ffffff', '#ffffff']}
+            moveParticlesOnHover={false}
+            particleHoverFactor={1}
+            alphaParticles={false}
+            particleBaseSize={100}
+            sizeRandomness={1}
+            cameraDistance={20}
+            disableRotation={false}
+          />
+        </div>
+      </div>
       
       <div className="landing-content">
         <motion.div 

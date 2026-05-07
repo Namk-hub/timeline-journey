@@ -3,18 +3,13 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
 import SeasonSection from './SeasonSection';
+import Season1 from './Season1';
 import ConstructionFooter from './ConstructionFooter';
 import './Timeline.css';
 
 gsap.registerPlugin(ScrollTrigger);
 
 const SEASONS = [
-  {
-    id: 1,
-    title: "Season 1: Clueless but Curious",
-    description: "The beginning of the journey. Staring at the screen, wondering how the internet actually works.",
-    align: "left"
-  },
   {
     id: 2,
     title: "Season 2: LinkedIn Illusions & Motivation Rush",
@@ -163,8 +158,9 @@ export default function Timeline() {
       </div>
 
       <div className="seasons-wrapper">
+        <Season1 />
         {SEASONS.map((season, index) => (
-          <SeasonSection key={season.id} season={season} index={index} />
+          <SeasonSection key={season.id} season={season} index={index + 1} />
         ))}
         <ConstructionFooter />
       </div>

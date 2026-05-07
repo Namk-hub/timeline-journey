@@ -9,6 +9,36 @@
   width: 100%;
   display: flex;
   padding: 0 10%;
+  position: relative;
+  z-index: 2;
+}
+
+.season-five-container {
+  overflow: visible;
+}
+
+.season-five-container .season-content-wrapper {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.season-five-bulb {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  opacity: 0.95;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.season-five-bulb > div,
+.season-five-bulb canvas {
+  width: 100% !important;
+  height: 100% !important;
+  transform: none;
 }
 
 .season-card {
@@ -77,5 +107,17 @@
   .season-card {
     width: 80%;
     margin: 0 auto;
+  }
+
+  .season-five-bulb {
+    width: 100%;
+    height: 100%;
+    right: 0;
+    opacity: 0.82;
+  }
+
+  .season-five-bulb > div,
+  .season-five-bulb canvas {
+    transform: none;
   }
 }

@@ -1,5 +1,6 @@
 import React, { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
+import Spline from '@splinetool/react-spline';
 import './SeasonSection.css';
 
 export default function SeasonSection({ season, index }) {
@@ -7,9 +8,16 @@ export default function SeasonSection({ season, index }) {
   const isInView = useInView(ref, { once: false, margin: "-20% 0px -20% 0px" });
 
   const isLeft = season.align === 'left';
+  const showSeasonFiveBulb = season.id === 5;
 
   return (
-    <div className="season-container" ref={ref}>
+    <div className={`season-container ${showSeasonFiveBulb ? 'season-five-container' : ''}`} ref={ref}>
+      {showSeasonFiveBulb && (
+        <div className="season-five-bulb" aria-hidden="true">
+          <Spline scene="https://prod.spline.design/7j7BoeCGCtG6Nn-w/scene.splinecode" />
+        </div>
+      )}
+
       <div className="season-content-wrapper">
         <motion.div 
           className={`season-card glass-panel ${isLeft ? 'align-left' : 'align-right'}`}

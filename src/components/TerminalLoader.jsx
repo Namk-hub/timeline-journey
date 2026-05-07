@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import Hyperspeed from './ui/Hyperspeed';
+import { hyperspeedPresets } from './ui/HyperSpeedPresets';
 import './TerminalLoader.css'; // Let's create a specific CSS for this
 
 const TERMINAL_LINES = [
   "> Initializing Developer...",
   "> Loading Curiosity...",
-  "> Installing HTML/CSS...",
-  "> Injecting JavaScript...",
   "> Starting Backend Engine...",
   "> Launching React Interface..."
 ];
@@ -31,21 +31,21 @@ export default function TerminalLoader({ onComplete }) {
             return newLines;
           });
           setCurrentCharIndex(prev => prev + 1);
-        }, Math.random() * 30 + 20); // Typing speed
+        }, Math.random() * 14 + 10); // Faster typing speed
         
         return () => clearTimeout(timeout);
       } else {
         const timeout = setTimeout(() => {
           setCurrentLineIndex(prev => prev + 1);
           setCurrentCharIndex(0);
-        }, 300); // Delay between lines
+        }, 120); // Faster delay between lines
         return () => clearTimeout(timeout);
       }
     } else {
       // Completed typing all lines
       const timeout = setTimeout(() => {
         onComplete();
-      }, 800); // Wait a bit before transitioning
+      }, 320); // Faster transition to landing
       return () => clearTimeout(timeout);
     }
   }, [currentLineIndex, currentCharIndex, onComplete]);
@@ -58,6 +58,12 @@ export default function TerminalLoader({ onComplete }) {
       exit={{ opacity: 0, y: -20, filter: "blur(10px)" }}
       transition={{ duration: 0.5 }}
     >
+      <div className="terminal-hyperspeed-bg">
+        <div style={{ width: '1080px', height: '1080px', position: 'relative' }}>
+          <Hyperspeed effectOptions={hyperspeedPresets.one} />
+        </div>
+      </div>
+
       <div className="terminal-window glass-panel">
         <div className="terminal-header">
           <div className="terminal-buttons">
