@@ -9,7 +9,6 @@ export default function ConstructionFooter() {
 
   return (
     <div className="construction-container" ref={ref}>
-      <div className="construction-background"></div>
       
       <motion.div 
         className="construction-content"

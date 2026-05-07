@@ -1,8 +1,12 @@
 import React, { useRef } from 'react';
-import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useGSAP } from '@gsap/react';
 import SeasonSection from './SeasonSection';
 import ConstructionFooter from './ConstructionFooter';
 import './Timeline.css';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const SEASONS = [
   {
@@ -46,32 +50,94 @@ const SEASONS = [
 
 export default function Timeline() {
   const containerRef = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start center", "end end"]
-  });
+  const pathRef = useRef(null);
+  const svgRef = useRef(null);
+  const alienRef = useRef(null);
+  const alienImgRef = useRef(null);
 
-  const pathLength = useSpring(scrollYProgress, {
-    stiffness: 100,
-    damping: 30,
-    restDelta: 0.001
-  });
+  useGSAP(() => {
+    const path = pathRef.current;
+    const svg = svgRef.current;
+    const alien = alienRef.current;
+    const container = containerRef.current;
+    const totalLength = path.getTotalLength();
+
+    // 1. Draw the organic path smoothly on scroll
+    gsap.set(path, { strokeDasharray: totalLength, strokeDashoffset: totalLength });
+    gsap.to(path, {
+      strokeDashoffset: 0,
+      ease: "none",
+      scrollTrigger: {
+        trigger: container,
+        start: "top center",
+        end: "bottom bottom",
+        scrub: 0.5,
+      }
+    });
+
+    // 2. Alien follows the path — uses ScrollTrigger.create with self.progress
+    //    for instant, lag-free positioning (no scrub smoothing delay).
+    //    Manually converts SVG viewBox coords → screen coords to handle
+    //    the preserveAspectRatio="none" distortion.
+    ScrollTrigger.create({
+      trigger: container,
+      start: "top center",
+      end: "bottom bottom",
+      onUpdate: (self) => {
+        const point = path.getPointAtLength(self.progress * totalLength);
+
+        // SVG viewBox → rendered pixel conversion
+        const svgRect = svg.getBoundingClientRect();
+        const containerRect = container.getBoundingClientRect();
+        const scaleX = svgRect.width / 700;   // viewBox width
+        const scaleY = svgRect.height / 5200;  // viewBox height
+
+        // Position relative to the container (absolute positioning context)
+        const x = (point.x * scaleX) + (svgRect.left - containerRect.left);
+        const y = (point.y * scaleY) + (svgRect.top - containerRect.top);
+
+        alien.style.transform = `translate(${x - 24}px, ${y - 24}px)`;
+      },
+    });
+
+    // 3. Subtle idle floating animation for the alien image
+    gsap.to(alienImgRef.current, {
+      y: "-=8",
+      x: "+=3",
+      rotation: 5,
+      duration: 2,
+      yoyo: true,
+      repeat: -1,
+      ease: "sine.inOut"
+    });
+  }, { scope: containerRef });
+
+  // Elegant, asymmetrical, organic Bézier curve
+  const organicPath = `
+  M 350 0
+  C 600 200, 100 500, 450 800
+  C 620 1100, 80 1400, 300 1800
+  C 500 2100, 150 2600, 420 3000
+  C 600 3400, 200 3700, 380 4200
+`;
 
   return (
-    <div className="timeline-container" ref={containerRef}>
+    <div className="timeline-container" ref={containerRef} style={{ position: 'relative' }}>
       <div className="svg-container">
-        <svg 
-          viewBox="0 0 100 600" 
-          preserveAspectRatio="none" 
+        <svg
+          ref={svgRef}
+          viewBox="0 0 700 5200"
+          preserveAspectRatio="none"
           className="snaking-path"
         >
-          {/* A curvy snaking path */}
-          <motion.path
-            d="M 50 0 C 50 50, 10 50, 10 100 C 10 150, 90 150, 90 200 C 90 250, 10 250, 10 300 C 10 350, 90 350, 90 400 C 90 450, 10 450, 10 500 C 10 550, 50 550, 50 600"
+          {/* Cinematic Organic Path */}
+          <path
+            ref={pathRef}
+            d={organicPath}
             fill="transparent"
             stroke="url(#gradient)"
-            strokeWidth="2"
-            style={{ pathLength: pathLength }}
+            strokeWidth="0.5"
+            pathLength="1"
           />
           <defs>
             <linearGradient id="gradient" x1="0" y1="0" x2="0" y2="1">
@@ -81,6 +147,19 @@ export default function Timeline() {
             </linearGradient>
           </defs>
         </svg>
+      </div>
+
+      {/* Alien follower — positioned via manual SVG→screen coord mapping */}
+      <div
+        ref={alienRef}
+        className="alien-follower"
+      >
+        <img
+          ref={alienImgRef}
+          src="/alien.png"
+          alt="alien follower"
+          className="alien-img"
+        />
       </div>
 
       <div className="seasons-wrapper">

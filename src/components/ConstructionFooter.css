@@ -7,21 +7,6 @@
   overflow: hidden;
 }
 
-.construction-background {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-image: url('../assets/circuit-detailed.jpg');
-  background-size: cover;
-  background-position: center;
-  z-index: -1;
-  opacity: 0.3;
-  mask-image: linear-gradient(to bottom, transparent, black);
-  -webkit-mask-image: linear-gradient(to bottom, transparent, black);
-}
-
 .construction-content {
   text-align: center;
   display: flex;
