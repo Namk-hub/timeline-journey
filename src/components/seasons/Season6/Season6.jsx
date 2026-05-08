@@ -4,6 +4,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
 import { motion, useInView } from 'framer-motion';
 import { Construction } from 'lucide-react';
+import CurvedLoop from '../../ui/CurvedLoop/CurvedLoop';
 import './Season6.css';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -69,6 +70,16 @@ export default function Season6() {
   return (
     <section className="s6-section" ref={sectionRef}>
       <div className="s6-hero" ref={heroRef}>
+
+        {/* Curved looping marquee footer element (Moved back to top) */}
+        <div className="s6-curve-wrapper">
+          <CurvedLoop
+            marqueeText="UNDER CONSTRUCTION 🚧 STILL COMPILING ⏳ COMING SOON ✨ "
+            speed={1.5}
+            curveAmount={120}
+            className="s6-curved-text"
+          />
+        </div>
 
         {/* Tag */}
         <div className="s6-tag">

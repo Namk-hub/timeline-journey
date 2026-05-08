@@ -140,10 +140,9 @@ export default function Timeline() {
           preserveAspectRatio="none"
           className="tl-svg"
         >
-          {/* Hidden sampler — never rendered, only used for getTotalLength */}
+          {/* ... (SVG content) */}
           <path ref={pathRef} d={PATH_D} fill="none" stroke="none" />
 
-          {/* Dim base dotted path with multi-color gradient */}
           <defs>
             <linearGradient id="path-gradient" x1="0" y1="0" x2="0" y2="1">
               <stop offset="0%"   stopColor="#00e5cc" />
@@ -164,7 +163,6 @@ export default function Timeline() {
             opacity="0.15"
           />
 
-          {/* Dots along the path */}
           {dots.map((pt, i) => {
             const t = i / (dots.length - 1);
             const col = getSeasonColor(t);
@@ -192,19 +190,19 @@ export default function Timeline() {
             );
           })}
         </svg>
-      </div>
 
-      {/* ── Alien follower ── */}
-      <div
-        ref={alienRef}
-        className="alien-follower"
-        style={{
-          transform:  `translate(${alienPos.x - 24}px, ${alienPos.y - 24}px)`,
-          opacity:    pathVisible ? 1 : 0,
-          transition: 'transform 0.18s cubic-bezier(0.25,0.1,0.25,1), opacity 0.8s ease',
-        }}
-      >
-        <img src="/alien.png" alt="alien follower" className="alien-img" />
+        {/* ── Alien follower (Now inside the masked column) ── */}
+        <div
+          ref={alienRef}
+          className="alien-follower"
+          style={{
+            transform:  `translate(${alienPos.x - 24}px, ${alienPos.y - 24}px)`,
+            opacity:    pathVisible ? 1 : 0,
+            transition: 'transform 0.18s cubic-bezier(0.25,0.1,0.25,1), opacity 0.8s ease',
+          }}
+        >
+          <img src="/alien.png" alt="alien follower" className="alien-img" />
+        </div>
       </div>
 
       {/* ── Season cards ── */}

@@ -35,6 +35,10 @@
   /* Above Season 3's z-index 3 */
   pointer-events: none;
   will-change: opacity;
+
+  /* Fade out path at the very bottom */
+  -webkit-mask-image: linear-gradient(to bottom, black 90%, transparent 100%);
+  mask-image: linear-gradient(to bottom, black 90%, transparent 100%);
 }
 
 .tl-svg {
