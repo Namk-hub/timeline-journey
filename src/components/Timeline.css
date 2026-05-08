@@ -1,52 +1,57 @@
+/* ── Timeline container ─────────────────────────────────────────────────── */
 .timeline-container {
   position: relative;
   width: 100vw;
   background-color: var(--bg-dark);
 }
 
+/* subtle circuit bg */
 .timeline-container::before {
   content: '';
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
   background-image: url('../assets/circuit-detailed.jpg');
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
-  opacity: 0.15;
+  opacity: 0.10;
   z-index: 0;
   pointer-events: none;
 }
 
-.svg-container {
+/* ── Centered SVG column ─────────────────────────────────────────────────── */
+/*  position:absolute so it spans the FULL container height                  */
+/*  left:50% + translateX(-50%) keeps it perfectly centered                  */
+.tl-svg-col {
   position: absolute;
   top: 0;
   left: 50%;
   transform: translateX(-50%);
-  width: 100%;
-  max-width: 800px;
+  width: 180px;
   height: 100%;
   z-index: 1;
   pointer-events: none;
+  will-change: opacity;
 }
 
-.snaking-path {
+.tl-svg {
   width: 100%;
-  height: 100%;
-  filter: drop-shadow(0 0 10px rgba(47, 129, 247, 0.5));
+  height: 100%;     /* fills full container height — dots stay in sync */
+  overflow: visible;
 }
 
-.seasons-wrapper {
-  position: relative;
-  z-index: 2;
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
+/* ── Dot halo pulse ──────────────────────────────────────────────────────── */
+.dot-halo {
+  animation: halo-pulse 1.8s ease-in-out infinite;
 }
 
-/* ── Alien Follower ── */
+@keyframes halo-pulse {
+  0%, 100% { opacity: 0.18; r: 7; }
+  50%       { opacity: 0.06; r: 10; }
+}
+
+/* ── Alien follower ──────────────────────────────────────────────────────── */
 .alien-follower {
   position: absolute;
   top: 0;
@@ -55,12 +60,30 @@
   height: 48px;
   z-index: 10;
   pointer-events: none;
-  filter: drop-shadow(0 0 12px rgba(47, 129, 247, 0.7))
-          drop-shadow(0 0 24px rgba(137, 87, 229, 0.5));
+  /* glow matches the cyan path */
+  filter:
+    drop-shadow(0 0 8px rgba(0, 229, 204, 0.9))
+    drop-shadow(0 0 20px rgba(0, 229, 204, 0.5));
+  will-change: transform, opacity;
 }
 
 .alien-img {
   width: 100%;
   height: 100%;
   object-fit: contain;
+  animation: alien-float 2.4s ease-in-out infinite;
+}
+
+@keyframes alien-float {
+  0%,  100% { transform: translateY(0px)  rotate(-4deg); }
+  50%        { transform: translateY(-9px) rotate( 4deg); }
+}
+
+/* ── Season cards wrapper ────────────────────────────────────────────────── */
+.seasons-wrapper {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
 }

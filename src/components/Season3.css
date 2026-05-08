@@ -1,0 +1,237 @@
+/* ═══════════════════════════════════════════════════════════
+   SEASON 3 — My First Hackathon
+   Color: warm amber #e09f3e
+   Layout: Title + ERROR! LEFT, TextPressure + Bulb RIGHT
+   ═══════════════════════════════════════════════════════════ */
+
+.s3-section {
+  position: relative;
+  width: 100%;
+  z-index: 3;
+  overflow: visible;
+}
+
+/* ── HERO LAYOUT ── */
+.s3-hero {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: clamp(3.4rem, 6vw, 6.4rem);
+  padding: 8rem 6% 4rem;
+  min-height: 90vh;
+}
+
+.s3-hero-text {
+  flex: 1;
+  max-width: 55%;
+  padding-top: 4rem;
+  min-width: 0;
+  position: relative;
+  z-index: 2;
+}
+
+.s3-hero-visual {
+  flex: 0 0 auto;
+  width: 40%;
+  max-width: 500px;
+  min-width: 280px;
+  position: sticky;
+  top: 10vh;
+  z-index: 1;
+  margin-left: clamp(1.75rem, 3.5vw, 3.6rem);
+}
+
+/* ── TAG ── */
+.s3-tag {
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+  margin-bottom: 2rem;
+  opacity: 0;
+}
+
+.s3-tag-label {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: #e09f3e;
+}
+
+.s3-tag-bracket {
+  color: rgba(224, 159, 62, 0.6);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+}
+
+/* ── TITLE BLOCK ── */
+.s3-title-wrap {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 1rem;
+  isolation: isolate;
+  max-width: 100%;
+  padding-left: 0.6rem;
+}
+
+.s3-title-watermark {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(4.5rem, 11.6vw, 11.2rem);
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: rgba(224, 159, 62, 0.10);
+  line-height: 0.85;
+  user-select: none;
+  pointer-events: none;
+  transform: translateX(-0.02em);
+  white-space: nowrap;
+}
+
+.s3-title-main {
+  position: absolute;
+  left: 1.4rem;
+  top: 59%;
+  transform: translateY(-50%);
+  margin: 0;
+  font-family: var(--font-serif);
+  font-size: clamp(3rem, 7.3vw, 8.3rem);
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  color: rgba(255, 235, 200, 0.95);
+  z-index: 2;
+  white-space: nowrap;
+}
+
+.s3-title-script {
+  font-family: var(--font-script);
+  font-size: 1.42em;
+  margin-right: -0.05em;
+  font-weight: 700;
+  color: #e09f3e;
+  display: inline-block;
+  text-shadow: 0 0 18px rgba(224, 159, 62, 0.5);
+}
+
+/* ── SUBTITLE ── */
+.s3-subtitle {
+  font-family: var(--font-serif);
+  font-size: clamp(1rem, 1.45vw, 1.25rem);
+  color: rgba(224, 159, 62, 0.7);
+  line-height: 1.6;
+  max-width: 560px;
+  opacity: 0;
+  position: relative;
+  padding-left: 4.2rem;
+  margin-top: 0.35rem;
+}
+
+.s3-subtitle-line {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 3rem;
+  height: 1px;
+  transform: translateY(-50%);
+  background: linear-gradient(90deg, #e09f3e, rgba(224, 159, 62, 0.05));
+}
+
+/* ═══ TEXT PRESSURE WRAPPER ═══════════════════════════════ */
+.s3-text-pressure-wrap {
+  position: relative;
+  height: 120px;
+  margin-bottom: 1rem;
+}
+
+/* ═══ SPLINE BULB ═══ */
+.s3-bulb-container {
+  width: 100%;
+  aspect-ratio: 1;
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+.s3-bulb-container > div,
+.s3-bulb-container canvas {
+  width: 100% !important;
+  height: 100% !important;
+  transform: none;
+}
+
+/* Hide the "Built with Spline" watermark */
+.s3-bulb-container [data-logo],
+.s3-bulb-container a[href*="spline"] {
+  display: none !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+/* ═══ INLINE NARRATIVE (beside bulb) ═══ */
+.s3-narrative-inline {
+  margin-top: 2rem;
+}
+
+.s3-narrative-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.s3-narrative-line {
+  font-family: 'Source Code Pro', monospace;
+  font-size: clamp(0.78rem, 1vw, 0.88rem);
+  font-weight: 400;
+  color: rgba(230, 237, 243, 0.78);
+  line-height: 1.8;
+  max-width: 520px;
+}
+
+.s3-narrative-highlight {
+  font-family: 'Source Code Pro', monospace;
+  font-size: clamp(0.88rem, 1.2vw, 1.02rem);
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1.6;
+}
+
+.s3-narrative-quote {
+  color: rgba(224, 159, 62, 0.85);
+  font-size: 1.1em;
+  font-weight: 600;
+  font-style: normal;
+  opacity: 0.9;
+}
+
+/* ═══ RESPONSIVE ═══ */
+@media (max-width: 900px) {
+  .s3-hero {
+    flex-direction: column;
+    padding: 5rem 5% 3rem;
+    min-height: auto;
+    gap: 2rem;
+  }
+
+  .s3-hero-text {
+    max-width: 100%;
+    padding-top: 2rem;
+  }
+
+  .s3-hero-visual {
+    width: min(86%, 410px);
+    max-width: 400px;
+    position: relative;
+    top: auto;
+    margin: 0 auto;
+    min-width: 0;
+  }
+
+  .s3-glitch {
+    font-size: clamp(3rem, 15vw, 5rem);
+  }
+
+  .s3-narrative {
+    padding: 2rem 5% 5rem;
+  }
+}
