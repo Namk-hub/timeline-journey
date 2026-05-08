@@ -11,16 +11,13 @@
   color: #c9d1d9;
 }
 
-/* ─── Grid Overlay ───────────────────────────────────────────────────────── */
-.lp-grid {
+/* ─── Background Container ────────────────────────────────────────────────── */
+.lp-bg-container {
   position: absolute;
   inset: 0;
-  background-image:
-    linear-gradient(rgba(0, 255, 220, 0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0, 255, 220, 0.04) 1px, transparent 1px);
-  background-size: 48px 48px;
-  pointer-events: none;
   z-index: 0;
+  opacity: 0.4; /* Much more subtle */
+  pointer-events: auto;
 }
 
 /* subtle cyan glow in top-left */
@@ -104,6 +101,15 @@
   align-items: center;
   gap: 3rem;
   padding: 2.5rem 3.5rem;
+  pointer-events: none; /* Allow mouse to pass to ShapeGrid background */
+}
+
+/* Re-enable pointer events for hero content */
+.lp-left,
+.lp-panel,
+.lp-nav,
+.lp-footer-strip {
+  pointer-events: auto;
 }
 
 /* Left accent line */

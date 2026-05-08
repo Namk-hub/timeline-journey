@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { AnimatePresence } from 'framer-motion';
-import TerminalLoader from './components/TerminalLoader';
-import LandingPage from './components/LandingPage';
-import Timeline from './components/Timeline';
+import TerminalLoader from './components/ui/Terminal/TerminalLoader';
+import LandingPage from './components/layout/LandingPage/LandingPage';
+import Timeline from './components/layout/Timeline/Timeline';
 
 
 function App() {

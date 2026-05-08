@@ -2,6 +2,7 @@ import React, { useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
+import TiltedCard from '../../ui/TiltedCard/TiltedCard';
 import './Season2.css';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -215,44 +216,87 @@ export default function Season2() {
 
         {/* ── STEP 1: Para (top-left) ── */}
         <div className="s2-step s2-step-1">
-          <div ref={para1Ref} className="s2-text-block">
-            <p>
-              I finally stopped just watching tutorials and opened a code editor - HTML felt weirdly satisfying — you type something, refresh the page, and it actually shows up.
-              Then CSS came along, and suddenly I was spending way too much time trying to make everything look cool But honestly, that was enough to keep me going.
-
-            </p>
-            <span className="s2-entry-label">ENTRY_S2_A</span>
+          <div ref={para1Ref}>
+            <TiltedCard
+              imageSrc=""
+              containerHeight="auto"
+              containerWidth="440px"
+              imageHeight="auto"
+              imageWidth="100%"
+              rotateAmplitude={10}
+              scaleOnHover={1.03}
+              showMobileWarning={false}
+              showTooltip={false}
+              displayOverlayContent={false}
+            >
+              <div className="s2-text-block">
+                <p>
+                  I finally stopped just watching tutorials and opened a code editor - HTML felt weirdly satisfying — you type something, refresh the page, and it actually shows up.
+                  Then CSS came along, and suddenly I was spending way too much time trying to make everything look cool But honestly, that was enough to keep me going.
+                </p>
+                <span className="s2-entry-label">ENTRY_S2_A</span>
+              </div>
+            </TiltedCard>
           </div>
         </div>
 
         {/* ── STEP 2: Para (middle) ── */}
         <div className="s2-step s2-step-2">
-          <div ref={para2Ref} className="s2-text-block">
-            <p>
-              I built my first little website Nothing crazy, just some sections, colors, and buttons. But it was responsive and actually worked on mobile
-              After that, I was hooked.
-            </p>
-            <span className="s2-entry-label">ENTRY_S2_B</span>
+          <div ref={para2Ref}>
+            <TiltedCard
+              imageSrc=""
+              containerHeight="auto"
+              containerWidth="440px"
+              imageHeight="auto"
+              imageWidth="100%"
+              rotateAmplitude={10}
+              scaleOnHover={1.03}
+              showMobileWarning={false}
+              showTooltip={false}
+              displayOverlayContent={false}
+            >
+              <div className="s2-text-block">
+                <p>
+                  I built my first little website Nothing crazy, just some sections, colors, and buttons. But it was responsive and actually worked on mobile
+                  After that, I was hooked.
+                </p>
+                <span className="s2-entry-label">ENTRY_S2_B</span>
+              </div>
+            </TiltedCard>
           </div>
         </div>
 
         {/* ── STEP 3: Tilted log box ── */}
         <div className="s2-step s2-step-3">
-          <div ref={boxRef} className="s2-log-box">
-            <div className="s2-box-grid" />
-            <div className="s2-box-header">
-              <span className="s2-box-dot" />
-              LOG_ENTRY_V2.0
-            </div>
-            <p className="s2-box-quote">
-              Started learning JavaScript… and there went my vacation 😭
-
-            </p>
-            <div className="s2-box-footer">
-              <span className="s2-box-status">STATUS:</span>
-              <span className="s2-box-status-val">HYPERLINKED</span>
-            </div>
-            <span className="s2-box-corner-dot" />
+          <div ref={boxRef}>
+            <TiltedCard
+              imageSrc=""
+              containerHeight="auto"
+              containerWidth="400px"
+              imageHeight="auto"
+              imageWidth="100%"
+              rotateAmplitude={15}
+              scaleOnHover={1.05}
+              showMobileWarning={false}
+              showTooltip={false}
+              displayOverlayContent={false}
+            >
+              <div className="s2-log-box" style={{ margin: 0, transform: 'none' }}>
+                <div className="s2-box-grid" />
+                <div className="s2-box-header">
+                  <span className="s2-box-dot" />
+                  LOG_ENTRY_V2.0
+                </div>
+                <p className="s2-box-quote">
+                  Started learning JavaScript… and there went my vacation 😭
+                </p>
+                <div className="s2-box-footer">
+                  <span className="s2-box-status">STATUS:</span>
+                  <span className="s2-box-status-val">HYPERLINKED</span>
+                </div>
+                <span className="s2-box-corner-dot" />
+              </div>
+            </TiltedCard>
           </div>
         </div>
 

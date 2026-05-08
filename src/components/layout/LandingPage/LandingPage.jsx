@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import ShapeGrid from '../../ui/ShapeGrid/ShapeGrid';
 import './LandingPage.css';
 
 const BOOT_SEGMENTS = 9;
@@ -47,8 +48,19 @@ export default function LandingPage() {
 
   return (
     <div className="lp-root">
-      {/* Grid overlay */}
-      <div className="lp-grid" />
+      {/* Interactive Shape Background */}
+      <div className="lp-bg-container">
+        <ShapeGrid 
+          speed={0.5}
+          squareSize={37}
+          direction='up'
+          borderColor="#082b1f"
+          hoverFillColor='#222'
+          shape='square'
+          hoverTrailAmount={0}
+        />
+      </div>
+
 
       {/* ── NAVBAR ── */}
       <nav className="lp-nav">

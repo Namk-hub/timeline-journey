@@ -4,7 +4,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
 import { motion, useInView } from 'framer-motion';
 import Spline from '@splinetool/react-spline';
-import TextPressure from './TextPressure';
+import TextPressure from '../../ui/TextPressure/TextPressure';
 import './Season3.css';
 
 gsap.registerPlugin(ScrollTrigger);

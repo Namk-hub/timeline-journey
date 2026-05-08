@@ -3,6 +3,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
 import { motion, useInView } from 'framer-motion';
+import TiltedCard from '../../ui/TiltedCard/TiltedCard';
 import './Season1.css';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -28,19 +29,17 @@ function Flipbook() {
   }, []);
 
   return (
-    <div className="flipbook-container">
-      <div className="flipbook-frame">
-        {FLIPBOOK_IMAGES.map((src, i) => (
-          <img
-            key={src}
-            src={src}
-            alt={`Season 1 frame ${i + 1}`}
-            className={`flipbook-img ${i === currentIndex ? 'active' : ''}`}
-          />
-        ))}
-        <div className="flipbook-scanlines" />
-        <div className="flipbook-glow" />
-      </div>
+    <div className="flipbook-frame">
+      {FLIPBOOK_IMAGES.map((src, i) => (
+        <img
+          key={src}
+          src={src}
+          alt={`Season 1 frame ${i + 1}`}
+          className={`flipbook-img ${i === currentIndex ? 'active' : ''}`}
+        />
+      ))}
+      <div className="flipbook-scanlines" />
+      <div className="flipbook-glow" />
     </div>
   );
 }
@@ -156,7 +155,22 @@ export default function Season1() {
         </div>
 
         <div className="s1-hero-visual">
-          <Flipbook />
+          <TiltedCard
+            imageSrc=""
+            altText="Season 1 Flipbook"
+            captionText=""
+            containerHeight="clamp(260px, 35vw, 400px)"
+            containerWidth="100%"
+            imageHeight="clamp(260px, 35vw, 400px)"
+            imageWidth="100%"
+            rotateAmplitude={12}
+            scaleOnHover={1.05}
+            showMobileWarning={false}
+            showTooltip={false}
+            displayOverlayContent={false}
+          >
+            <Flipbook />
+          </TiltedCard>
         </div>
       </div>
 

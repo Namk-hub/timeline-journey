@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import Hyperspeed from './ui/Hyperspeed';
-import { hyperspeedPresets } from './ui/HyperSpeedPresets';
+import Hyperspeed from '../Hyperspeed';
+import { hyperspeedPresets } from '../HyperSpeedPresets';
 import './TerminalLoader.css'; // Let's create a specific CSS for this
 
 const TERMINAL_LINES = [

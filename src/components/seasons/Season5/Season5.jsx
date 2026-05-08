@@ -3,7 +3,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
 import { motion } from 'framer-motion';
-import CircularText from './CircularText';
+import CircularText from '../../ui/CircularText/CircularText';
 import './Season5.css';
 
 gsap.registerPlugin(ScrollTrigger);

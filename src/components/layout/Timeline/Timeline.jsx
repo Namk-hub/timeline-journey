@@ -1,11 +1,11 @@
 import React, { useRef, useEffect, useState, useCallback } from 'react';
-import SeasonSection from './SeasonSection';
-import Season1 from './Season1';
-import Season2 from './Season2';
-import Season3 from './Season3';
-import Season4 from './Season4';
-import Season5 from './Season5';
-import Season6 from './Season6';
+import SeasonSection from '../SeasonSection/SeasonSection';
+import Season1 from '../../seasons/Season1/Season1';
+import Season2 from '../../seasons/Season2/Season2';
+import Season3 from '../../seasons/Season3/Season3';
+import Season4 from '../../seasons/Season4/Season4';
+import Season5 from '../../seasons/Season5/Season5';
+import Season6 from '../../seasons/Season6/Season6';
 import './Timeline.css';
 
 // ── Wider irregular path (viewBox 600 × 1800) ──
