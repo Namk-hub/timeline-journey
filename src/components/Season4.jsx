@@ -8,6 +8,7 @@ import './Season4.css';
 gsap.registerPlugin(ScrollTrigger);
 
 const CAROUSEL_CARDS = [
+  { icon: '⚛️', label: 'React' },
   { icon: '🗄️', label: 'MongoDB' },
   { icon: '⚡', label: 'Express.js' },
   { icon: '🟢', label: 'Node.js' },
@@ -80,9 +81,9 @@ function ProjectCard({ card }) {
 }
 
 export default function Season4() {
-  const sectionRef  = useRef(null);
-  const heroRef     = useRef(null);
-  const tagRef      = useRef(null);
+  const sectionRef = useRef(null);
+  const heroRef = useRef(null);
+  const tagRef = useRef(null);
   const subtitleRef = useRef(null);
 
   useGSAP(() => {
@@ -100,21 +101,21 @@ export default function Season4() {
       { opacity: 0, x: 30 },
       { opacity: 1, x: 0, duration: 0.4, ease: "power3.out" }
     )
-    .fromTo('.s4-title-watermark',
-      { opacity: 0, scale: 0.95 },
-      { opacity: 1, scale: 1, duration: 0.6, ease: "power2.out" },
-      "-=0.2"
-    )
-    .fromTo('.s4-title-main',
-      { opacity: 0, y: 40, clipPath: "inset(100% 0 0 0)" },
-      { opacity: 1, y: 0, clipPath: "inset(0% 0 0 0)", duration: 0.8, ease: "power4.out" },
-      "-=0.4"
-    )
-    .fromTo(subtitleRef.current,
-      { opacity: 0, y: 20 },
-      { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" },
-      "-=0.3"
-    );
+      .fromTo('.s4-title-watermark',
+        { opacity: 0, scale: 0.95 },
+        { opacity: 1, scale: 1, duration: 0.6, ease: "power2.out" },
+        "-=0.2"
+      )
+      .fromTo('.s4-title-main',
+        { opacity: 0, y: 40, clipPath: "inset(100% 0 0 0)" },
+        { opacity: 1, y: 0, clipPath: "inset(0% 0 0 0)", duration: 0.8, ease: "power4.out" },
+        "-=0.4"
+      )
+      .fromTo(subtitleRef.current,
+        { opacity: 0, y: 20 },
+        { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" },
+        "-=0.3"
+      );
   }, { scope: sectionRef });
 
   const cards = [...CAROUSEL_CARDS, ...CAROUSEL_CARDS];
@@ -137,7 +138,10 @@ export default function Season4() {
         </div>
         <p className="s4-subtitle s4-subtitle-right" ref={subtitleRef}>
           <span className="s4-subtitle-line s4-subtitle-line-right" />
-          Season 4 — The Backend Awakening.
+          Season 4 — React & The Backend Awakening.
+        </p>
+        <p className="s4-intro">
+          Still figuring out backend ngl. Started poking around, broke a lot of things, understood a few. And then React decided to join the chaos too — folder structure, components, props, where does what go?? Genuinely having a crisis. Long way to go. But I showed up and that's something.
         </p>
       </div>
 

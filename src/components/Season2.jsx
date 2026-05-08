@@ -217,11 +217,9 @@ export default function Season2() {
         <div className="s2-step s2-step-1">
           <div ref={para1Ref} className="s2-text-block">
             <p>
-              I finally stopped watching and actually opened a code editor.
-              HTML felt weirdly satisfying honestly. You type something,
-              it shows up. That's it. Simple. Then CSS came along and that's
-              where things got fun — I could make stuff look good and that
-              was enough motivation to keep going.
+              I finally stopped just watching tutorials and opened a code editor - HTML felt weirdly satisfying — you type something, refresh the page, and it actually shows up.
+              Then CSS came along, and suddenly I was spending way too much time trying to make everything look cool But honestly, that was enough to keep me going.
+
             </p>
             <span className="s2-entry-label">ENTRY_S2_A</span>
           </div>
@@ -231,9 +229,8 @@ export default function Season2() {
         <div className="s2-step s2-step-2">
           <div ref={para2Ref} className="s2-text-block">
             <p>
-              I built a portfolio. Nothing fancy, just my name, some sections,
-              a few colors. But it was responsive. Worked on mobile. I did that.
-              That one little win kept me going more than anything else.
+              I built my first little website Nothing crazy, just some sections, colors, and buttons. But it was responsive and actually worked on mobile
+              After that, I was hooked.
             </p>
             <span className="s2-entry-label">ENTRY_S2_B</span>
           </div>
@@ -248,7 +245,8 @@ export default function Season2() {
               LOG_ENTRY_V2.0
             </div>
             <p className="s2-box-quote">
-              "Started JS and vacation startssss"
+              Started learning JavaScript… and there went my vacation 😭
+
             </p>
             <div className="s2-box-footer">
               <span className="s2-box-status">STATUS:</span>

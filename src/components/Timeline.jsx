@@ -4,24 +4,27 @@ import Season1 from './Season1';
 import Season2 from './Season2';
 import Season3 from './Season3';
 import Season4 from './Season4';
-import ConstructionFooter from './ConstructionFooter';
+import Season5 from './Season5';
+import Season6 from './Season6';
 import './Timeline.css';
 
-// ── Winding S-curve path (viewBox 200 × 1800) ──────────────────────────────
+// ── Wider irregular path (viewBox 600 × 1800) ──
 const PATH_D = `
-  M 100 0
-  C 170 120, 170 230, 100 320
-  C 30  410, 30  530, 100 640
-  C 170 750, 170 870, 100 980
-  C 30  1090, 30 1210, 100 1320
-  C 170 1430, 170 1560, 100 1660
-  C 30  1720, 30  1780, 100 1800
+  M 300 0
+  C 520 60, 560 150, 480 260
+  C 380 400, 80 350, 60 480
+  C 40 610, 280 620, 400 700
+  C 550 790, 560 880, 420 960
+  C 250 1060, 60 1050, 100 1180
+  C 140 1310, 500 1280, 520 1380
+  C 540 1480, 300 1530, 200 1600
+  C 100 1670, 250 1750, 300 1800
 `;
 
-const VIEWBOX_W   = 200;
+const VIEWBOX_W   = 600;
 const VIEWBOX_H   = 1800;
-const DOT_COUNT   = 90;       // total dots along the path
-const SVG_COL_W   = 180;      // pixel width of the centered SVG column
+const DOT_COUNT   = 110;
+const SVG_COL_W   = 600;
 
 /** Sample N evenly-spaced points along an SVG <path> element. */
 function samplePath(pathEl, n) {
@@ -31,17 +34,26 @@ function samplePath(pathEl, n) {
   );
 }
 
-// Seasons 1–4 have dedicated components — generic cards start at Season 5
-const SEASONS = [
-  {
-    id: 5,
-    title: "Season 5: Leveling Up – React & Real Building Era",
-    description:
-      "Components, state, and hooks. Building actual applications. The current arc.",
-    align: "right",
-    isCurrent: true,
-  },
+// Season colors mapped by progress (0→1 down the page)
+const SEASON_COLORS = [
+  { at: 0.00, color: '#00e5cc' },  // S1 cyan
+  { at: 0.17, color: '#74009f' },  // S2 purple
+  { at: 0.33, color: '#e09f3e' },  // S3 amber
+  { at: 0.50, color: '#39d353' },  // S4 green
+  { at: 0.67, color: '#2f81f7' },  // S5 blue
+  { at: 0.83, color: '#f97316' },  // S6 orange
+  { at: 1.00, color: '#f97316' },
 ];
+
+function getSeasonColor(t) {
+  for (let i = 0; i < SEASON_COLORS.length - 1; i++) {
+    if (t <= SEASON_COLORS[i + 1].at) return SEASON_COLORS[i].color;
+  }
+  return SEASON_COLORS[SEASON_COLORS.length - 1].color;
+}
+
+// All seasons now have dedicated components
+const SEASONS = [];
 
 export default function Timeline() {
   const containerRef = useRef(null);
@@ -97,16 +109,13 @@ export default function Timeline() {
     const pt       = path.getPointAtLength(progress * totalLen);
 
     // scaleX/Y converts SVG units → rendered pixels
-    const scaleX = SVG_COL_W / VIEWBOX_W;
+    const containerW = container.offsetWidth;
+    const scaleX = containerW / VIEWBOX_W;
     const scaleY = containerH / VIEWBOX_H;
 
-    // Left edge of the centered SVG column inside the container
-    const containerW = container.offsetWidth;
-    const svgLeft    = (containerW - SVG_COL_W) / 2;
-
-    // Offset alien 36px to the RIGHT of the path so it floats beside, not on top
+    // SVG is now full-width, no offset needed
     setAlienPos({
-      x: svgLeft + pt.x * scaleX + 36,
+      x: pt.x * scaleX,
       y: pt.y * scaleY,
     });
   }, [dots]);
@@ -134,44 +143,54 @@ export default function Timeline() {
           {/* Hidden sampler — never rendered, only used for getTotalLength */}
           <path ref={pathRef} d={PATH_D} fill="none" stroke="none" />
 
-          {/* Dim base dotted path (always shown once visible) */}
+          {/* Dim base dotted path with multi-color gradient */}
+          <defs>
+            <linearGradient id="path-gradient" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%"   stopColor="#00e5cc" />
+              <stop offset="18%"  stopColor="#74009f" />
+              <stop offset="36%"  stopColor="#e09f3e" />
+              <stop offset="54%"  stopColor="#39d353" />
+              <stop offset="72%"  stopColor="#2f81f7" />
+              <stop offset="100%" stopColor="#f97316" />
+            </linearGradient>
+          </defs>
           <path
             d={PATH_D}
             fill="none"
-            stroke="rgba(0,229,204,0.09)"
-            strokeWidth="1.8"
+            stroke="url(#path-gradient)"
+            strokeWidth="1.5"
             strokeDasharray="4 11"
             strokeLinecap="round"
+            opacity="0.15"
           />
 
           {/* Dots along the path */}
-          {dots.map((pt, i) => (
-            <g key={i}>
-              {/* Glow halo — only on lit dots */}
-              {lit[i] && (
+          {dots.map((pt, i) => {
+            const t = i / (dots.length - 1);
+            const col = getSeasonColor(t);
+            return (
+              <g key={i}>
+                {lit[i] && (
+                  <circle
+                    cx={pt.x} cy={pt.y} r="7"
+                    fill={`${col}22`}
+                    className="dot-halo"
+                  />
+                )}
                 <circle
-                  cx={pt.x}
-                  cy={pt.y}
-                  r="7"
-                  fill="rgba(0,229,204,0.13)"
-                  className="dot-halo"
+                  cx={pt.x} cy={pt.y}
+                  r={lit[i] ? 2.6 : 1.6}
+                  fill={lit[i] ? col : `${col}2d`}
+                  style={{
+                    filter: lit[i]
+                      ? `drop-shadow(0 0 3px ${col}) drop-shadow(0 0 9px ${col}a6)`
+                      : 'none',
+                    transition: 'fill 0.18s ease, filter 0.18s ease',
+                  }}
                 />
-              )}
-              {/* Core dot */}
-              <circle
-                cx={pt.x}
-                cy={pt.y}
-                r={lit[i] ? 2.6 : 1.6}
-                fill={lit[i] ? '#00e5cc' : 'rgba(0,229,204,0.17)'}
-                style={{
-                  filter: lit[i]
-                    ? 'drop-shadow(0 0 3px #00e5cc) drop-shadow(0 0 9px rgba(0,229,204,0.65))'
-                    : 'none',
-                  transition: 'fill 0.18s ease, filter 0.18s ease',
-                }}
-              />
-            </g>
-          ))}
+              </g>
+            );
+          })}
         </svg>
       </div>
 
@@ -182,7 +201,7 @@ export default function Timeline() {
         style={{
           transform:  `translate(${alienPos.x - 24}px, ${alienPos.y - 24}px)`,
           opacity:    pathVisible ? 1 : 0,
-          transition: 'opacity 0.8s ease',
+          transition: 'transform 0.18s cubic-bezier(0.25,0.1,0.25,1), opacity 0.8s ease',
         }}
       >
         <img src="/alien.png" alt="alien follower" className="alien-img" />
@@ -194,10 +213,8 @@ export default function Timeline() {
         <Season2 />
         <Season3 />
         <Season4 />
-        {SEASONS.map((season, index) => (
-          <SeasonSection key={season.id} season={season} index={index + 4} />
-        ))}
-        <ConstructionFooter />
+        <Season5 />
+        <Season6 />
       </div>
     </div>
   );

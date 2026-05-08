@@ -123,6 +123,18 @@
   background: linear-gradient(270deg, #39d353, rgba(57, 211, 83, 0.05));
 }
 
+.s4-intro {
+  font-family: 'Source Code Pro', monospace;
+  font-size: clamp(0.78rem, 1vw, 0.88rem);
+  font-weight: 400;
+  color: rgba(200, 255, 210, 0.5);
+  line-height: 1.8;
+  max-width: 520px;
+  margin-left: auto;
+  margin-top: 1.5rem;
+  text-align: right;
+}
+
 /* ═══ CAROUSEL (dimmed) ═════════════════════════════════ */
 .s4-carousel {
   width: 100%;

@@ -1,24 +1,69 @@
 /* ═══════════════════════════════════════════════════════════
    SEASON 3 — My First Hackathon
    Color: warm amber #e09f3e
-   Layout: Title + ERROR! LEFT, TextPressure + Bulb RIGHT
+   Layout: Full-width Spline BG (shifted right), content overlaid
    ═══════════════════════════════════════════════════════════ */
 
 .s3-section {
   position: relative;
-  width: 100%;
   z-index: 3;
-  overflow: visible;
+  overflow: hidden;
+  min-height: 90vh;
+  /* Break out of the max-width parent to go full-viewport */
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  /* Pure black bg — hides the circuit image so bulb glows clean */
+  background: #000;
 }
 
-/* ── HERO LAYOUT ── */
+/* ═══ FULL-WIDTH SPLINE BG — shifted right ═══ */
+.s3-bulb-bg {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+/* Shift the Spline scene to the right side */
+.s3-bulb-bg > div {
+  width: 100% !important;
+  height: 100% !important;
+  display: block;
+  position: relative;
+  left: 25%;           /* push 3D scene rightward */
+}
+
+.s3-bulb-bg canvas {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* Hide the "Built with Spline" watermark */
+.s3-bulb-bg [data-logo],
+.s3-bulb-bg a[href*="spline"] {
+  display: none !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+/* ── HERO LAYOUT (overlaid on bg) ── */
 .s3-hero {
+  position: relative;
+  z-index: 2;
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
   gap: clamp(3.4rem, 6vw, 6.4rem);
   padding: 8rem 6% 4rem;
   min-height: 90vh;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .s3-hero-text {
@@ -144,31 +189,7 @@
   margin-bottom: 1rem;
 }
 
-/* ═══ SPLINE BULB ═══ */
-.s3-bulb-container {
-  width: 100%;
-  aspect-ratio: 1;
-  position: relative;
-  overflow: hidden;
-  border-radius: 12px;
-}
-
-.s3-bulb-container > div,
-.s3-bulb-container canvas {
-  width: 100% !important;
-  height: 100% !important;
-  transform: none;
-}
-
-/* Hide the "Built with Spline" watermark */
-.s3-bulb-container [data-logo],
-.s3-bulb-container a[href*="spline"] {
-  display: none !important;
-  opacity: 0 !important;
-  pointer-events: none !important;
-}
-
-/* ═══ INLINE NARRATIVE (beside bulb) ═══ */
+/* ═══ INLINE NARRATIVE ═══ */
 .s3-narrative-inline {
   margin-top: 2rem;
 }
@@ -206,6 +227,15 @@
 
 /* ═══ RESPONSIVE ═══ */
 @media (max-width: 900px) {
+  .s3-section {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .s3-bulb-bg > div {
+    left: 10%;     /* less shift on smaller screens */
+  }
+
   .s3-hero {
     flex-direction: column;
     padding: 5rem 5% 3rem;
@@ -225,10 +255,6 @@
     top: auto;
     margin: 0 auto;
     min-width: 0;
-  }
-
-  .s3-glitch {
-    font-size: clamp(3rem, 15vw, 5rem);
   }
 
   .s3-narrative {

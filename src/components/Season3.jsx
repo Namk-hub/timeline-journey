@@ -10,10 +10,9 @@ import './Season3.css';
 gsap.registerPlugin(ScrollTrigger);
 
 const NARRATIVE_LINES = [
-  { text: "We had a team, a plan, and for a while it was actually going well — until the backend broke and suddenly I'm staring at errors I couldn't read.", type: "normal" },
-  { text: "Wanting to hide but having nothing to offer, and that feeling of watching someone else fight a fire you can't touch? That stays with you.", type: "highlight" },
-  { text: "But we pushed through. Fixed it, shipped it, and earned our wildest prize yet: an honorable mention.", type: "normal" },
-  { text: "On the way home it hit me that I never want to feel that useless again.", type: "highlight" },
+  { text: "THIS was my first hackathon  We had a team, a plan, and everything was going great until the backend broke. My teammate was fighting for his life fixing it, and then 30 minutes before submission the whole website crashed -Full panic mode." },
+  { text: "Someone told us to check the previous git commit, and thankfully we had it saved locally. We rolled back, got it running, and submitted just in time.", },
+  { text: "The mentor said he liked our idea, but the whole thing made me realize something, I don’t just wanna make the frontend look pretty anymore — I actually wanna understand how everything works.", },
 ];
 
 function NarrativeLine({ line, index }) {
@@ -39,11 +38,15 @@ function NarrativeLine({ line, index }) {
 }
 
 export default function Season3() {
-  const sectionRef   = useRef(null);
-  const heroRef      = useRef(null);
+  const sectionRef = useRef(null);
+  const heroRef = useRef(null);
   const narrativeRef = useRef(null);
 
+  // Lazy load Spline and heavy UI
+  const isInView = useInView(sectionRef, { once: true, margin: "200px" });
+
   useGSAP(() => {
+    if (!isInView) return;
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: heroRef.current,
@@ -58,21 +61,21 @@ export default function Season3() {
       { opacity: 0, x: -30 },
       { opacity: 1, x: 0, duration: 0.4, ease: "power3.out" }
     )
-    .fromTo('.s3-title-watermark',
-      { opacity: 0, scale: 0.95 },
-      { opacity: 1, scale: 1, duration: 0.6, ease: "power2.out" },
-      "-=0.2"
-    )
-    .fromTo('.s3-title-main',
-      { opacity: 0, y: 40, clipPath: "inset(100% 0 0 0)" },
-      { opacity: 1, y: 0, clipPath: "inset(0% 0 0 0)", duration: 0.8, ease: "power4.out" },
-      "-=0.4"
-    )
-    .fromTo('.s3-subtitle',
-      { opacity: 0, y: 20 },
-      { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" },
-      "-=0.3"
-    );
+      .fromTo('.s3-title-watermark',
+        { opacity: 0, scale: 0.95 },
+        { opacity: 1, scale: 1, duration: 0.6, ease: "power2.out" },
+        "-=0.2"
+      )
+      .fromTo('.s3-title-main',
+        { opacity: 0, y: 40, clipPath: "inset(100% 0 0 0)" },
+        { opacity: 1, y: 0, clipPath: "inset(0% 0 0 0)", duration: 0.8, ease: "power4.out" },
+        "-=0.4"
+      )
+      .fromTo('.s3-subtitle',
+        { opacity: 0, y: 20 },
+        { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" },
+        "-=0.3"
+      );
 
     // Narrative parallax
     gsap.fromTo(narrativeRef.current,
@@ -88,15 +91,22 @@ export default function Season3() {
         }
       }
     );
-  }, { scope: sectionRef });
+  }, { scope: sectionRef, dependencies: [isInView] });
 
   return (
     <section className="s3-section" ref={sectionRef}>
 
-      {/* ═══ HERO: Title LEFT + Spline bulb RIGHT ═══ */}
+      {/* ═══ FULL-BG SPLINE — scene shifted right ═══ */}
+      <div className="s3-bulb-bg">
+        {isInView && (
+          <Spline scene="https://prod.spline.design/7j7BoeCGCtG6Nn-w/scene.splinecode" />
+        )}
+      </div>
+
+      {/* ═══ HERO: Title LEFT + TextPressure RIGHT ═══ */}
       <div className="s3-hero" ref={heroRef}>
 
-        {/* LEFT: Editorial title + ERROR glitch */}
+        {/* LEFT: Editorial title */}
         <div className="s3-hero-text">
           <div className="s3-tag">
             <span className="s3-tag-bracket">[</span>
@@ -116,7 +126,7 @@ export default function Season3() {
             Season 3 — My First Hackathon.
           </p>
 
-          {/* Narrative inline beside bulb */}
+          {/* Narrative */}
           <div className="s3-narrative-inline" ref={narrativeRef}>
             <div className="s3-narrative-content">
               {NARRATIVE_LINES.map((line, i) => (
@@ -127,27 +137,27 @@ export default function Season3() {
 
         </div>
 
-        {/* RIGHT: TextPressure "My First Hackathon" + Spline bulb */}
+        {/* RIGHT: TextPressure */}
         <div className="s3-hero-visual">
           <div className="s3-text-pressure-wrap">
-            <TextPressure
-              text="My First Hackathon"
-              flex={true}
-              alpha={false}
-              stroke={true}
-              width={true}
-              weight={true}
-              italic={true}
-              textColor="#e09f3e"
-              strokeColor="#e09f3e"
-              minFontSize={28}
-            />
-          </div>
-          <div className="s3-bulb-container">
-            <Spline scene="https://prod.spline.design/7j7BoeCGCtG6Nn-w/scene.splinecode" />
+            {isInView && (
+              <TextPressure
+                text="My First Hackathon"
+                flex={true}
+                alpha={false}
+                stroke={true}
+                width={true}
+                weight={true}
+                italic={true}
+                textColor="#e09f3e"
+                strokeColor="#e09f3e"
+                minFontSize={28}
+              />
+            )}
           </div>
         </div>
       </div>
     </section>
   );
 }
+

@@ -7,14 +7,13 @@ import './Season1.css';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const FLIPBOOK_IMAGES = ['/tech.jpg', '/github.jpg', '/hello-world.jpg'];
+const FLIPBOOK_IMAGES = ['/tech.jpg', '/github.jpg', '/hello-world.jpg', '/code.jpg', '/twitter.jpg'];
 
 const NARRATIVE_LINES = [
-  { text: "I did not have a roadmap. I only had curiosity.", type: "highlight" },
-  { text: "One random tech video turned into ten tabs, late-night rabbit holes, and a new kind of restlessness that would not let me stop learning.", type: "normal" },
-  { text: "I joined every community I could find. LinkedIn, Reddit, Discord, Twitter. Quietly observing, saving notes, decoding how real developers think and build.", type: "normal" },
-  { text: "Then it clicked: the people I admired were not superhuman. They were consistent. They started somewhere small and kept showing up.", type: "normal" },
-  { text: "That became my first real belief: I can build this life too.", type: "highlight" },
+  { text: "I didn’t have some perfect roadmap. It all started with one random tech video — Then suddenly I was deep into late-night rabbit holes, opening way too many tabs, and trying to learn everything at once.", type: "normal" },
+  { text: "I joined communities on LinkedIn, Reddit, Discord, and Twitter, mostly just observing and learning from developers who were building cool stuff.", type: "normal" },
+  { text: "And slowly I realized they weren’t superhuman — they just stayed consistent and kept learning.", type: "normal" },
+  { text: "That’s when I had my first real thought — wait… maybe I can do this too.", type: "highlight" },
 ];
 
 // Flipbook — cycles images every 500ms like a stop-motion video
@@ -24,7 +23,7 @@ function Flipbook() {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % FLIPBOOK_IMAGES.length);
-    }, 500);
+    }, 400);
     return () => clearInterval(interval);
   }, []);
 
@@ -93,21 +92,21 @@ export default function Season1() {
       { opacity: 0, x: -30 },
       { opacity: 1, x: 0, duration: 0.4, ease: "power3.out" }
     )
-    .fromTo('.s1-title-watermark',
-      { opacity: 0, scale: 0.95 },
-      { opacity: 1, scale: 1, duration: 0.6, ease: "power2.out" },
-      "-=0.2"
-    )
-    .fromTo('.s1-title-main',
-      { opacity: 0, y: 40, clipPath: "inset(100% 0 0 0)" },
-      { opacity: 1, y: 0, clipPath: "inset(0% 0 0 0)", duration: 0.8, ease: "power4.out" },
-      "-=0.4"
-    )
-    .fromTo(subtitleRef.current,
-      { opacity: 0, y: 20 },
-      { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" },
-      "-=0.3"
-    );
+      .fromTo('.s1-title-watermark',
+        { opacity: 0, scale: 0.95 },
+        { opacity: 1, scale: 1, duration: 0.6, ease: "power2.out" },
+        "-=0.2"
+      )
+      .fromTo('.s1-title-main',
+        { opacity: 0, y: 40, clipPath: "inset(100% 0 0 0)" },
+        { opacity: 1, y: 0, clipPath: "inset(0% 0 0 0)", duration: 0.8, ease: "power4.out" },
+        "-=0.4"
+      )
+      .fromTo(subtitleRef.current,
+        { opacity: 0, y: 20 },
+        { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" },
+        "-=0.3"
+      );
 
     // Narrative parallax
     gsap.fromTo(narrativeRef.current,

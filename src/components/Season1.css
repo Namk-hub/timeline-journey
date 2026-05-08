@@ -14,19 +14,22 @@
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  gap: clamp(3.4rem, 6vw, 6.4rem);
+  gap: clamp(5rem, 10vw, 12rem); /* Increased gap for more distance */
   padding: 8rem 6% 2rem;
   min-height: auto;
 }
 
 .s1-hero-text {
   flex: 1;
-  max-width: 58%;
+  max-width: 50%;
   padding-top: 4rem;
   min-width: 0;
   position: relative;
   z-index: 2;
-  
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
 }
 
 .s1-hero-visual {
@@ -36,9 +39,11 @@
   min-width: 260px;
   position: sticky;
   top: 15vh;
-  z-index: 1;
+  z-index: 10; /* Ensure it stays above watermark if they touch */
   margin-left: clamp(1.75rem, 3.5vw, 3.6rem);
-  transform: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* ── TAG / BADGE ── */
@@ -77,7 +82,7 @@
   display: block;
   font-family: var(--font-display);
   font-weight: 800;
-  font-size: clamp(4.5rem, 11.6vw, 11.2rem);
+  font-size: clamp(3.5rem, 8.5vw, 9rem); /* Reduced size to prevent overlap */
   letter-spacing: 0.03em;
   text-transform: uppercase;
   color: rgba(0, 229, 204, 0.12);
@@ -171,13 +176,11 @@
 .flipbook-scanlines {
   position: absolute;
   inset: 0;
-  background: repeating-linear-gradient(
-    0deg,
-    transparent,
-    transparent 2px,
-    rgba(0, 0, 0, 0.08) 2px,
-    rgba(0, 0, 0, 0.08) 4px
-  );
+  background: repeating-linear-gradient(0deg,
+      transparent,
+      transparent 2px,
+      rgba(0, 0, 0, 0.08) 2px,
+      rgba(0, 0, 0, 0.08) 4px);
   pointer-events: none;
   z-index: 2;
 }
@@ -217,12 +220,10 @@
 .s1-divider-line {
   flex: 1;
   height: 1px;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    var(--border-color),
-    transparent
-  );
+  background: linear-gradient(90deg,
+      transparent,
+      var(--border-color),
+      transparent);
 }
 
 .s1-divider-icon {
