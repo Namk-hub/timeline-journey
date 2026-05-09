@@ -10,7 +10,7 @@ import './Season3.css';
 gsap.registerPlugin(ScrollTrigger);
 
 const NARRATIVE_LINES = [
-  { text: "THIS was my first hackathon  We had a team, a plan, and everything was going great until the backend broke. My teammate was fighting for his life fixing it, and then 30 minutes before submission the whole website crashed -Full panic mode." },
+  { text: "This was my first hackathon. We had a team, a plan, and everything was going great until the API integration broke. My teammate was fighting for his life trying to fix it, and then 30 minutes before submission, the whole website crashed. Full panic mode." },
   { text: "Someone told us to check the previous git commit, and thankfully we had it saved locally. We rolled back, got it running, and submitted just in time.", },
   { text: "The mentor said he liked our idea, but the whole thing made me realize something, I don’t just wanna make the frontend look pretty anymore — I actually wanna understand how everything works.", },
 ];
