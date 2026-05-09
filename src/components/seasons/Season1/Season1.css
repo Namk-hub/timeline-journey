@@ -233,10 +233,67 @@
 }
 
 /* ── Narrative lines ── */
+.s1-narrative-layout {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 5rem; /* Increased gap as requested */
+  width: 100%;
+}
+
 .s1-narrative-content {
   display: flex;
   flex-direction: column;
   gap: 1.2rem;
+  flex: 1;
+}
+
+.s1-narrative-extra {
+  flex: 0 0 auto;
+  padding-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8rem; /* Increased gap even more as requested */
+  transform: rotate(-6deg);
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.s1-folder-arrow-container {
+  position: absolute;
+  top: 1.8rem; /* Start right below the label */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 110px; /* Taller to fill the gap */
+  pointer-events: none;
+  opacity: 0.8;
+}
+
+.s1-folder-arrow {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.s1-folder-label {
+  font-family: 'JetBrains Mono', 'Courier New', monospace;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #00e5cc;
+  opacity: 0.9;
+  letter-spacing: 0.25rem;
+  text-transform: uppercase;
+  border-bottom: 1px solid rgba(0, 229, 204, 0.5);
+  padding-bottom: 4px;
+  margin-bottom: 0;
+  text-shadow: 0 0 10px rgba(0, 229, 204, 0.3);
+}
+
+.s1-narrative-extra:hover {
+  transform: rotate(0deg) scale(1.05);
 }
 
 .narrative-line {

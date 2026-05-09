@@ -34,6 +34,9 @@ export default function Season2() {
   const dia1Ref = useRef(null);
   const dia2Ref = useRef(null);
   const dia3Ref = useRef(null);
+  const htmlIconRef = useRef(null);
+  const cssIconRef = useRef(null);
+  const jsIconRef = useRef(null);
 
   useGSAP(() => {
     const path = arrowPathRef.current;
@@ -48,7 +51,7 @@ export default function Season2() {
       strokeDashoffset: totalLen,
     });
     gsap.set(dot, { opacity: 0 });
-
+    
     // ── Master timeline ─────────────────────────────────────────────
     const tl = gsap.timeline({
       scrollTrigger: {
@@ -69,6 +72,12 @@ export default function Season2() {
         { opacity: 0, y: 24, filter: 'blur(8px)' },
         { opacity: 1, y: 0, filter: 'blur(0px)', duration: 0.5, ease: 'power3.out' },
         '-=0.1'
+      )
+      // HTML Icon appears with Card 1
+      .fromTo(htmlIconRef.current,
+        { opacity: 0, scale: 0.5 },
+        { opacity: 0.7, scale: 1, duration: 0.5, ease: 'back.out(1.5)' },
+        '<'
       )
 
       // Arrow dot appears + path draws to card 2
@@ -92,6 +101,12 @@ export default function Season2() {
         { opacity: 1, y: 0, filter: 'blur(0px)', duration: 0.5, ease: 'power3.out' },
         '-=0.15'
       )
+      // CSS Icon appears with Card 2
+      .fromTo(cssIconRef.current,
+        { opacity: 0, scale: 0.5 },
+        { opacity: 0.7, scale: 1, duration: 0.5, ease: 'back.out(1.5)' },
+        '<'
+      )
 
       // Arrow continues to card 3
       .to(path, {
@@ -107,11 +122,17 @@ export default function Season2() {
         '-=0.3'
       )
 
-      // Tilted box appears
+      // Tilted log box appears
       .fromTo(boxRef.current,
         { opacity: 0, rotate: -12, scale: 0.85, filter: 'blur(10px)' },
         { opacity: 1, rotate: -4, scale: 1, filter: 'blur(0px)', duration: 0.6, ease: 'back.out(1.4)' },
         '-=0.25'
+      )
+      // JS Icon appears with Card 3
+      .fromTo(jsIconRef.current,
+        { opacity: 0, scale: 0.5 },
+        { opacity: 0.7, scale: 1, duration: 0.6, ease: 'back.out(1.5)' },
+        '<'
       );
 
     // ── Dot follows the path tip every frame ────────────────────────
@@ -150,6 +171,13 @@ export default function Season2() {
 
       {/* ─── STAIR-STEP + ARROW OVERLAY ─────────────────────────────── */}
       <div className="s2-staircase">
+        
+        {/* Flying Tech Icons (Now animated peeking) */}
+        <img ref={htmlIconRef} src="/html.png" alt="HTML" className="s2-flying-icon icon-html" />
+        <img ref={cssIconRef} src="/css.png" alt="CSS" className="s2-flying-icon icon-css" />
+        <img ref={jsIconRef} src="/js.png" alt="JS" className="s2-flying-icon icon-js" />
+
+        {/* ── SVG arrow overlay ── */}
 
         {/* ── SVG arrow overlay ── */}
         <svg

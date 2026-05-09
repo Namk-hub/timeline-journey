@@ -347,6 +347,47 @@
   z-index: 1;
 }
 
+/* ── FLYING ICONS ── */
+.s2-flying-icon {
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  object-fit: contain;
+  pointer-events: none;
+  z-index: 1; /* Behind cards */
+  filter: drop-shadow(0 0 20px rgba(116, 0, 159, 0.3));
+  opacity: 0; /* Hidden initially for GSAP */
+}
+
+.icon-html {
+  width: 100px;
+  height: 100px;
+  top: 10px;
+  left: 26%; /* Peek from top-right corner */
+  transform: rotate(15deg);
+}
+
+.icon-css {
+  width: 100px;
+  height: 100px;
+  top: 260px; /* Moved down to align with Card 2 */
+  left: 62%;
+  transform: rotate(12deg);
+}
+
+.icon-js {
+  width: 100px;
+  height: 100px;
+  top: 480px; /* Moved down behind the card's top edge */
+  left: 98%; /* Pushed further to the right */
+  transform: rotate(-8deg);
+}
+
+.s2-step {
+  position: relative;
+  z-index: 2; /* In front of icons */
+}
+
 /* ═══ RESPONSIVE ═════════════════════════════════════════ */
 @media (max-width: 900px) {
   .s2-staircase {

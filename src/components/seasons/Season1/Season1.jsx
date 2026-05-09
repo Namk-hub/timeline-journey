@@ -4,6 +4,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
 import { motion, useInView } from 'framer-motion';
 import TiltedCard from '../../ui/TiltedCard/TiltedCard';
+import Folder from '../../ui/Folder/Folder';
 import './Season1.css';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -67,6 +68,7 @@ function NarrativeLine({ line, index }) {
   );
 }
 
+
 export default function Season1() {
   const sectionRef = useRef(null);
   const heroRef = useRef(null);
@@ -125,6 +127,7 @@ export default function Season1() {
 
   return (
     <section className="s1-section" ref={sectionRef}>
+
       {/* ═══ HERO: Editorial Typography + Flipbook ═══ */}
       <div className="s1-hero" ref={heroRef}>
         <div className="s1-hero-text">
@@ -183,10 +186,49 @@ export default function Season1() {
             <span className="s1-divider-line" />
           </div>
 
-          <div className="s1-narrative-content">
-            {NARRATIVE_LINES.map((line, i) => (
-              <NarrativeLine key={i} line={line} index={i} />
-            ))}
+          <div className="s1-narrative-layout">
+            <div className="s1-narrative-content">
+              {NARRATIVE_LINES.map((line, i) => (
+                <NarrativeLine key={i} line={line} index={i} />
+              ))}
+            </div>
+            <div className="s1-narrative-extra">
+              <span className="s1-folder-label">INTERESTS</span>
+              
+              {/* Decorative Arrow */}
+              <div className="s1-folder-arrow-container">
+                <svg viewBox="0 0 100 120" fill="none" className="s1-folder-arrow">
+                  <motion.path
+                    d="M 50,0 C 50,30 90,20 90,60 C 90,100 30,100 30,60 C 30,40 70,40 70,70 C 70,95 50,100 50,120"
+                    stroke="#00e5cc"
+                    strokeWidth="1.5"
+                    strokeDasharray="4 4"
+                    initial={{ pathLength: 0, opacity: 0 }}
+                    animate={{ pathLength: 1, opacity: 0.6 }}
+                    transition={{ duration: 1.5, delay: 0.5 }}
+                  />
+                  <motion.path
+                    d="M 44,112 L 50,120 L 56,112"
+                    stroke="#00e5cc"
+                    strokeWidth="1.5"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 0.6 }}
+                    transition={{ delay: 1.8 }}
+                  />
+                </svg>
+              </div>
+
+              <Folder
+                color="#00e5cc"
+                size={1.3}
+                className="s1-folder-decoration"
+                items={[
+                  'Open Source',
+                  'Interactive Web Experiences',
+                  'UI/UX & Animations'
+                ]}
+              />
+            </div>
           </div>
         </div>
       </div>
