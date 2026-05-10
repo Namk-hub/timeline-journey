@@ -389,7 +389,7 @@
 }
 
 /* ═══ RESPONSIVE ═════════════════════════════════════════ */
-@media (max-width: 900px) {
+@media (max-width: 1150px) {
   .s2-staircase {
     grid-template-columns: 1fr;
     grid-template-rows: auto;
@@ -405,6 +405,10 @@
   }
 
   .s2-arrow-svg {
+    display: none;
+  }
+
+  .s2-flying-icon {
     display: none;
   }
 

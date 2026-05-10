@@ -85,6 +85,7 @@ export default function Season4() {
   const heroRef = useRef(null);
   const tagRef = useRef(null);
   const subtitleRef = useRef(null);
+  const introRef = useRef(null);
 
   useGSAP(() => {
     const tl = gsap.timeline({
@@ -115,6 +116,11 @@ export default function Season4() {
         { opacity: 0, y: 20 },
         { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" },
         "-=0.3"
+      )
+      .fromTo(introRef.current,
+        { opacity: 0, y: 20 },
+        { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" },
+        "-=0.4"
       );
   }, { scope: sectionRef });
 
@@ -140,7 +146,7 @@ export default function Season4() {
           <span className="s4-subtitle-line s4-subtitle-line-right" />
           Season 4 — React & The Backend Awakening.
         </p>
-        <p className="s4-intro">
+        <p className="s4-intro" ref={introRef}>
           Still figuring out backend ngl. Started poking around, broke a lot of things, understood a few. And then React decided to join the chaos too — folder structure, components, props, where does what go?? Genuinely having a crisis. Long way to go. But I showed up and that's something.
         </p>
       </div>

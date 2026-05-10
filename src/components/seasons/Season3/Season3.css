@@ -233,7 +233,7 @@
   }
 
   .s3-bulb-bg > div {
-    left: 10%;     /* less shift on smaller screens */
+    left: 30%;     /* shift more to the right on mobile */
   }
 
   .s3-hero {
@@ -246,6 +246,17 @@
   .s3-hero-text {
     max-width: 100%;
     padding-top: 2rem;
+    z-index: 10; /* Ensure text stays on top */
+  }
+
+  .s3-narrative-content {
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 1.5rem;
+    border-radius: 12px;
+    border: 1px solid rgba(224, 159, 62, 0.15);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
   }
 
   .s3-hero-visual {
