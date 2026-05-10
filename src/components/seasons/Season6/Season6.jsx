@@ -4,14 +4,13 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
 import { motion, useInView } from 'framer-motion';
 import { Construction } from 'lucide-react';
-import CurvedLoop from '../../ui/CurvedLoop/CurvedLoop';
 import './Season6.css';
 
 gsap.registerPlugin(ScrollTrigger);
 
 function TerminalLine({ text, delay }) {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: false, margin: "-10% 0px -10% 0px" });
+  const isInView = useInView(ref, { once: true, margin: "-10% 0px -10% 0px" });
 
   return (
     <motion.p
@@ -71,15 +70,6 @@ export default function Season6() {
     <section className="s6-section" ref={sectionRef}>
       <div className="s6-hero" ref={heroRef}>
 
-        {/* Curved looping marquee footer element (Moved back to top) */}
-        <div className="s6-curve-wrapper">
-          <CurvedLoop
-            marqueeText="UNDER CONSTRUCTION 🚧 STILL COMPILING ⏳ COMING SOON ✨ "
-            speed={1.5}
-            curveAmount={120}
-            className="s6-curved-text"
-          />
-        </div>
 
         {/* Tag */}
         <div className="s6-tag">
@@ -122,13 +112,7 @@ export default function Season6() {
           <TerminalLine text={<><span className="s6-prompt">Status:</span> Still under construction 🚧</>} delay={0.1} />
           <TerminalLine text={<><span className="s6-prompt">ETA:</span> When it's ready</>} delay={0.2} />
           <TerminalLine text={<><span className="s6-prompt">Tagline:</span> "Good things are compiling..."</>} delay={0.3} />
-          <motion.p
-            className="s6-cursor"
-            animate={{ opacity: [1, 0] }}
-            transition={{ duration: 0.8, repeat: Infinity, ease: "steps(1)" }}
-          >
-            _
-          </motion.p>
+          <p className="s6-cursor">_</p>
         </div>
       </div>
     </section>
