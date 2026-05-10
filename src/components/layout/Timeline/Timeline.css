@@ -113,3 +113,17 @@
   max-width: 1200px;
   margin: 0 auto;
 }
+@media (max-width: 768px) {
+  .dot-halo {
+    animation: none;
+    display: none;
+  }
+
+  .alien-follower {
+    filter: drop-shadow(0 0 10px rgba(0, 229, 204, 0.6));
+  }
+
+  .alien-img {
+    animation: none;
+  }
+}

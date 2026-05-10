@@ -46,13 +46,7 @@
 
 @media (max-width: 900px) {
   .s6-curve-wrapper {
-    position: relative;
-    top: 0;
-    height: 120px;
-    margin-bottom: 1rem;
-  }
-  .s6-curved-text {
-    font-size: 2rem;
+    display: none;
   }
 }
 

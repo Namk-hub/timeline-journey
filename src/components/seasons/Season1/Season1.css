@@ -346,6 +346,25 @@
     transform: translateX(0);
   }
 
+  .s1-narrative-layout {
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .s1-narrative-extra {
+    display: none;
+  }
+
+  .narrative-line {
+    font-family: var(--font-serif);
+    font-size: 1.05rem;
+    line-height: 1.85;
+    color: rgba(230, 237, 243, 0.85);
+    max-width: 100%;
+    text-align: left;
+    letter-spacing: 0.01em;
+  }
+
   .s1-title-number {
     font-size: clamp(5rem, 20vw, 8rem);
   }

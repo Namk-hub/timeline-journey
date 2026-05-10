@@ -23,7 +23,7 @@ const PATH_D = `
 
 const VIEWBOX_W   = 600;
 const VIEWBOX_H   = 1800;
-const DOT_COUNT   = 110;
+const DOT_COUNT   = window.innerWidth < 768 ? 60 : 110; // Fewer dots on mobile
 const SVG_COL_W   = 600;
 
 /** Sample N evenly-spaced points along an SVG <path> element. */
@@ -180,7 +180,7 @@ export default function Timeline() {
                   r={lit[i] ? 2.6 : 1.6}
                   fill={lit[i] ? col : `${col}2d`}
                   style={{
-                    filter: lit[i]
+                    filter: (lit[i] && window.innerWidth >= 768)
                       ? `drop-shadow(0 0 3px ${col}) drop-shadow(0 0 9px ${col}a6)`
                       : 'none',
                     transition: 'fill 0.18s ease, filter 0.18s ease',
@@ -196,9 +196,11 @@ export default function Timeline() {
           ref={alienRef}
           className="alien-follower"
           style={{
-            transform:  `translate(${alienPos.x - 24}px, ${alienPos.y - 24}px)`,
+            transform:  `translate3d(${alienPos.x - 24}px, ${alienPos.y - 24}px, 0)`,
             opacity:    pathVisible ? 1 : 0,
-            transition: 'transform 0.18s cubic-bezier(0.25,0.1,0.25,1), opacity 0.8s ease',
+            transition: window.innerWidth < 768 
+              ? 'transform 0.1s linear, opacity 0.8s ease' 
+              : 'transform 0.18s cubic-bezier(0.25,0.1,0.25,1), opacity 0.8s ease',
           }}
         >
           <img src="/alien.png" alt="alien follower" className="alien-img" />

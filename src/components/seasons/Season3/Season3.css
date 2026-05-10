@@ -250,9 +250,9 @@
   }
 
   .s3-narrative-content {
-    background: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    background: rgba(0, 0, 0, 0.65);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
     padding: 1.5rem;
     border-radius: 12px;
     border: 1px solid rgba(224, 159, 62, 0.15);

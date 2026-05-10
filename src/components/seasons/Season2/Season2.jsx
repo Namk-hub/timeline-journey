@@ -248,7 +248,7 @@ export default function Season2() {
             <TiltedCard
               imageSrc=""
               containerHeight="auto"
-              containerWidth="440px"
+              containerWidth="100%"
               imageHeight="auto"
               imageWidth="100%"
               rotateAmplitude={10}
@@ -274,7 +274,7 @@ export default function Season2() {
             <TiltedCard
               imageSrc=""
               containerHeight="auto"
-              containerWidth="440px"
+              containerWidth="100%"
               imageHeight="auto"
               imageWidth="100%"
               rotateAmplitude={10}
@@ -300,7 +300,7 @@ export default function Season2() {
             <TiltedCard
               imageSrc=""
               containerHeight="auto"
-              containerWidth="400px"
+              containerWidth="100%"
               imageHeight="auto"
               imageWidth="100%"
               rotateAmplitude={15}

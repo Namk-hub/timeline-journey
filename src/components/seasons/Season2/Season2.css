@@ -103,7 +103,7 @@
   background: linear-gradient(90deg, #74009f, rgba(116, 0, 159, 0.05));
 }
 
-/* ── Right-aligned header modifiers ─────────────────────── */
+
 .s2-header-right {
   text-align: right;
 }
@@ -164,17 +164,13 @@
 /* Glowing dot */
 .s2-arrow-dot {
   filter:
-    drop-shadow(0 0 5px #74009f)
-    drop-shadow(0 0 14px rgba(116,0,159,0.8))
-    drop-shadow(0 0 30px rgba(116,0,159,0.4));
+    drop-shadow(0 0 5px #74009f) drop-shadow(0 0 14px rgba(116, 0, 159, 0.8)) drop-shadow(0 0 30px rgba(116, 0, 159, 0.4));
 }
 
 /* Diamond waypoints */
 .s2-diamond {
   filter:
-    drop-shadow(0 0 6px #74009f)
-    drop-shadow(0 0 16px rgba(116,0,159,0.7))
-    drop-shadow(0 0 32px rgba(116,0,159,0.3));
+    drop-shadow(0 0 6px #74009f) drop-shadow(0 0 16px rgba(116, 0, 159, 0.7)) drop-shadow(0 0 32px rgba(116, 0, 159, 0.3));
 }
 
 /* ── Step positions (diagonal stagger) ── */
@@ -187,7 +183,8 @@
 .s2-step-2 {
   grid-column: 2;
   grid-row: 2;
-  z-index: 3;          /* arrow goes BEHIND this card */
+  z-index: 3;
+  /* arrow goes BEHIND this card */
 }
 
 .s2-step-3 {
@@ -204,7 +201,8 @@
   border-radius: 4px;
   padding: 1.4rem 1.5rem 2rem;
   max-width: 340px;
-  opacity: 1; /* GSAP handles wrapper opacity */
+  opacity: 1;
+  /* GSAP handles wrapper opacity */
 }
 
 .s2-text-block p {
@@ -241,26 +239,32 @@
     0 0 70px rgba(116, 0, 159, 0.06),
     inset 0 0 40px rgba(116, 0, 159, 0.04);
   overflow: hidden;
-  opacity: 1; /* GSAP handles wrapper opacity */
+  opacity: 1;
+  /* GSAP handles wrapper opacity */
   z-index: 2;
 }
 
 .s2-log-box::before {
   content: '';
   position: absolute;
-  top: 0; left: 0;
-  width: 28px; height: 28px;
-  border-top: 2px solid rgba(116,0,159,0.5);
-  border-left: 2px solid rgba(116,0,159,0.5);
+  top: 0;
+  left: 0;
+  width: 28px;
+  height: 28px;
+  border-top: 2px solid rgba(116, 0, 159, 0.5);
+  border-left: 2px solid rgba(116, 0, 159, 0.5);
   border-radius: 6px 0 0 0;
 }
+
 .s2-log-box::after {
   content: '';
   position: absolute;
-  bottom: 0; right: 0;
-  width: 28px; height: 28px;
-  border-bottom: 2px solid rgba(116,0,159,0.5);
-  border-right: 2px solid rgba(116,0,159,0.5);
+  bottom: 0;
+  right: 0;
+  width: 28px;
+  height: 28px;
+  border-bottom: 2px solid rgba(116, 0, 159, 0.5);
+  border-right: 2px solid rgba(116, 0, 159, 0.5);
   border-radius: 0 0 6px 0;
 }
 
@@ -268,8 +272,8 @@
   position: absolute;
   inset: 0;
   background-image:
-    linear-gradient(rgba(116,0,159,0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(116,0,159,0.05) 1px, transparent 1px);
+    linear-gradient(rgba(116, 0, 159, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(116, 0, 159, 0.05) 1px, transparent 1px);
   background-size: 24px 24px;
   pointer-events: none;
   z-index: 0;
@@ -300,8 +304,15 @@
 }
 
 @keyframes s2-dot-blink {
-  0%, 100% { box-shadow: 0 0 6px #74009f; }
-  50%       { box-shadow: 0 0 14px #74009f, 0 0 24px rgba(116,0,159,0.5); }
+
+  0%,
+  100% {
+    box-shadow: 0 0 6px #74009f;
+  }
+
+  50% {
+    box-shadow: 0 0 14px #74009f, 0 0 24px rgba(116, 0, 159, 0.5);
+  }
 }
 
 .s2-box-quote {
@@ -332,7 +343,7 @@
 
 .s2-box-status-val {
   color: #74009f;
-  text-shadow: 0 0 8px rgba(116,0,159,0.6);
+  text-shadow: 0 0 8px rgba(116, 0, 159, 0.6);
 }
 
 .s2-box-corner-dot {
@@ -343,7 +354,7 @@
   height: 7px;
   border-radius: 2px;
   background: #74009f;
-  box-shadow: 0 0 6px rgba(116,0,159,0.7);
+  box-shadow: 0 0 6px rgba(116, 0, 159, 0.7);
   z-index: 1;
 }
 
@@ -354,23 +365,27 @@
   height: 120px;
   object-fit: contain;
   pointer-events: none;
-  z-index: 1; /* Behind cards */
+  z-index: 1;
+  /* Behind cards */
   filter: drop-shadow(0 0 20px rgba(116, 0, 159, 0.3));
-  opacity: 0; /* Hidden initially for GSAP */
+  opacity: 0;
+  /* Hidden initially for GSAP */
 }
 
 .icon-html {
   width: 100px;
   height: 100px;
   top: 10px;
-  left: 26%; /* Peek from top-right corner */
+  left: 26%;
+  /* Peek from top-right corner */
   transform: rotate(15deg);
 }
 
 .icon-css {
   width: 100px;
   height: 100px;
-  top: 260px; /* Moved down to align with Card 2 */
+  top: 260px;
+  /* Moved down to align with Card 2 */
   left: 62%;
   transform: rotate(12deg);
 }
@@ -378,14 +393,17 @@
 .icon-js {
   width: 100px;
   height: 100px;
-  top: 480px; /* Moved down behind the card's top edge */
-  left: 98%; /* Pushed further to the right */
+  top: 480px;
+  /* Moved down behind the card's top edge */
+  left: 98%;
+  /* Pushed further to the right */
   transform: rotate(-8deg);
 }
 
 .s2-step {
   position: relative;
-  z-index: 2; /* In front of icons */
+  z-index: 2;
+  /* In front of icons */
 }
 
 /* ═══ RESPONSIVE ═════════════════════════════════════════ */

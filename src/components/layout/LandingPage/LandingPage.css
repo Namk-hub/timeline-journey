@@ -379,6 +379,7 @@
   .lp-panel {
     width: 100%;
     max-width: 500px;
+    backdrop-filter: blur(6px);
   }
 
   .lp-footer-strip {
