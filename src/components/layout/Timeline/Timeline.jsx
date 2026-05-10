@@ -56,9 +56,10 @@ function getSeasonColor(t) {
 const SEASONS = [];
 
 export default function Timeline() {
-  const containerRef = useRef(null);
-  const pathRef      = useRef(null);   // hidden <path> used for sampling
-  const alienRef     = useRef(null);
+  const containerRef    = useRef(null);
+  const pathRef         = useRef(null);
+  const alienRef        = useRef(null);
+  const pathLengthRef   = useRef(0);
 
   const [dots,        setDots]        = useState([]);
   const [lit,         setLit]         = useState([]);
@@ -68,6 +69,7 @@ export default function Timeline() {
   // ── 1. Sample dots once the hidden path mounts ────────────────────────────
   useEffect(() => {
     if (pathRef.current) {
+      pathLengthRef.current = pathRef.current.getTotalLength();
       const pts = samplePath(pathRef.current, DOT_COUNT);
       setDots(pts);
       setLit(new Array(DOT_COUNT).fill(false));
@@ -78,42 +80,41 @@ export default function Timeline() {
   const handleScroll = useCallback(() => {
     const container = containerRef.current;
     const path      = pathRef.current;
-    if (!container || !path) return;
+    if (!container || !path || !pathLengthRef.current) return;
 
     const rect       = container.getBoundingClientRect();
     const viewH      = window.innerHeight;
     const containerH = container.offsetHeight;
-
-    // Pixels scrolled into the container (negative rect.top once scrolled past)
     const scrolledIn = -rect.top;
 
-    // ── Trigger: path appears at 1/4 of Season1 (≈ 0.25 × viewport) ────────
     const FADE_THRESHOLD = viewH * 0.25;
     const isVisible = scrolledIn >= FADE_THRESHOLD;
-    setPathVisible(isVisible);
+    
+    // Only update pathVisible if it changed to avoid unnecessary re-renders
+    setPathVisible(prev => (prev !== isVisible ? isVisible : prev));
 
-    // ── Progress 0→1: starts at FADE_THRESHOLD, ends at bottom of container ─
-    //    totalTravel = full scrollable distance AFTER the fade threshold
     const totalTravel    = containerH - viewH - FADE_THRESHOLD;
     const adjustedScroll = scrolledIn - FADE_THRESHOLD;
     const progress       = Math.min(1, Math.max(0, adjustedScroll / totalTravel));
 
-    // ── Light up dots ────────────────────────────────────────────────────────
+    // Update lit dots
     if (dots.length > 0) {
       const litCount = Math.round(progress * DOT_COUNT);
-      setLit(Array.from({ length: DOT_COUNT }, (_, i) => i < litCount));
+      // Only update if the litCount actually changed to save cycles
+      setLit(prev => {
+        const currentLitCount = prev.filter(Boolean).length;
+        if (currentLitCount === litCount) return prev;
+        return Array.from({ length: DOT_COUNT }, (_, i) => i < litCount);
+      });
     }
 
-    // ── Alien position: SVG viewBox → container-relative px ─────────────────
-    const totalLen = path.getTotalLength();
-    const pt       = path.getPointAtLength(progress * totalLen);
+    // Alien position: using cached totalLen
+    const pt = path.getPointAtLength(progress * pathLengthRef.current);
 
-    // scaleX/Y converts SVG units → rendered pixels
     const containerW = container.offsetWidth;
     const scaleX = containerW / VIEWBOX_W;
     const scaleY = containerH / VIEWBOX_H;
 
-    // SVG is now full-width, no offset needed
     setAlienPos({
       x: pt.x * scaleX,
       y: pt.y * scaleY,
@@ -121,9 +122,20 @@ export default function Timeline() {
   }, [dots]);
 
   useEffect(() => {
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll(); // seed on mount
-    return () => window.removeEventListener('scroll', handleScroll);
+    let ticking = false;
+    const onScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          handleScroll();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener('scroll', onScroll);
   }, [handleScroll]);
 
   // ── Render ────────────────────────────────────────────────────────────────

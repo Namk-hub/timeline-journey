@@ -22,6 +22,12 @@
   pointer-events: none;
 }
 
+@media (max-width: 768px) {
+  .timeline-container::before {
+    background-attachment: scroll;
+  }
+}
+
 /* ── Centered SVG column ─────────────────────────────────────────────────── */
 /*  position:absolute so it spans the FULL container height                  */
 /*  left:50% + translateX(-50%) keeps it perfectly centered                  */
