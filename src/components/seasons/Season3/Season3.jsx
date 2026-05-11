@@ -1,18 +1,20 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState, useEffect, useCallback, lazy, Suspense, startTransition } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
 import { motion, useInView } from 'framer-motion';
-import Spline from '@splinetool/react-spline';
 import TextPressure from '../../ui/TextPressure/TextPressure';
 import './Season3.css';
+
+// Code-split: Spline runtime loads in a separate chunk
+const Spline = lazy(() => import('@splinetool/react-spline'));
 
 gsap.registerPlugin(ScrollTrigger);
 
 const NARRATIVE_LINES = [
   { text: "This was my first hackathon. We had a team, a plan, and everything was going great until the API integration broke. My teammate was fighting for his life trying to fix it, and then 30 minutes before submission, the whole website crashed. Full panic mode." },
   { text: "Someone told us to check the previous git commit, and thankfully we had it saved locally. We rolled back, got it running, and submitted just in time.", },
-  { text: "The mentor said he liked our idea, but the whole thing made me realize something, I don’t just wanna make the frontend look pretty anymore — I actually wanna understand how everything works.", },
+  { text: "The mentor said he liked our idea, but the whole thing made me realize something, I don't just wanna make the frontend look pretty anymore — I actually wanna understand how everything works.", },
 ];
 
 function NarrativeLine({ line, index }) {
@@ -41,9 +43,38 @@ export default function Season3() {
   const sectionRef = useRef(null);
   const heroRef = useRef(null);
   const narrativeRef = useRef(null);
+  const [mountSpline, setMountSpline] = useState(false);
+  const [splineReady, setSplineReady] = useState(false);
 
-  // Lazy load Spline and heavy UI
-  const isInView = useInView(sectionRef, { once: true, margin: "200px" });
+  // Detect when section is near viewport
+  const isInView = useInView(sectionRef, { once: true, margin: "400px" });
+
+  // When section comes into view, defer Spline mount to idle time
+  // so it doesn't interrupt scrolling
+  useEffect(() => {
+    if (!isInView) return;
+
+    const mount = () => {
+      // startTransition tells React this is low-priority,
+      // so it won't block user interactions like scrolling
+      startTransition(() => {
+        setMountSpline(true);
+      });
+    };
+
+    // Wait for browser idle time before mounting
+    if ('requestIdleCallback' in window) {
+      const id = requestIdleCallback(mount, { timeout: 2000 });
+      return () => cancelIdleCallback(id);
+    } else {
+      const id = setTimeout(mount, 200);
+      return () => clearTimeout(id);
+    }
+  }, [isInView]);
+
+  const handleSplineLoad = useCallback(() => {
+    setSplineReady(true);
+  }, []);
 
   useGSAP(() => {
     if (!isInView) return;
@@ -97,9 +128,20 @@ export default function Season3() {
     <section className="s3-section" ref={sectionRef}>
 
       {/* ═══ FULL-BG SPLINE — scene shifted right ═══ */}
-      <div className="s3-bulb-bg">
-        {isInView && (
-          <Spline scene="https://prod.spline.design/7j7BoeCGCtG6Nn-w/scene.splinecode" />
+      <div className={`s3-bulb-bg ${splineReady ? 's3-bulb-loaded' : ''}`}>
+        {/* Skeleton placeholder while Spline loads */}
+        {!splineReady && (
+          <div className="s3-bulb-skeleton">
+            <div className="s3-bulb-skeleton-glow" />
+          </div>
+        )}
+        {mountSpline && (
+          <Suspense fallback={null}>
+            <Spline
+              scene="https://prod.spline.design/7j7BoeCGCtG6Nn-w/scene.splinecode"
+              onLoad={handleSplineLoad}
+            />
+          </Suspense>
         )}
       </div>
 
@@ -160,4 +202,3 @@ export default function Season3() {
     </section>
   );
 }
-

@@ -28,15 +28,63 @@
   z-index: 0;
   pointer-events: none;
   overflow: hidden;
+
+  /* GPU isolation — own compositing layer */
+  contain: layout style;
+  will-change: opacity;
+
+  /* Start invisible, fade in when loaded */
+  opacity: 0;
+  transition: opacity 0.8s ease;
 }
 
-/* Shift the Spline scene to the right side */
-.s3-bulb-bg > div {
+/* Fade in once the Spline scene is ready */
+.s3-bulb-bg.s3-bulb-loaded {
+  opacity: 1;
+}
+
+/* ── Skeleton placeholder while Spline loads ── */
+.s3-bulb-skeleton {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+
+.s3-bulb-skeleton-glow {
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(224, 159, 62, 0.18) 0%,
+    rgba(224, 159, 62, 0.05) 50%,
+    transparent 70%
+  );
+  animation: s3-skeleton-pulse 2s ease-in-out infinite;
+  /* Position toward the right to match where the bulb appears */
+  margin-left: 40%;
+}
+
+@keyframes s3-skeleton-pulse {
+  0%, 100% { transform: scale(1); opacity: 0.6; }
+  50%      { transform: scale(1.15); opacity: 1; }
+}
+
+/* Shift the Spline viewer to the right side */
+.s3-bulb-bg > div:not(.s3-bulb-skeleton) {
   width: 100% !important;
   height: 100% !important;
   display: block;
   position: relative;
   left: 25%;           /* push 3D scene rightward */
+}
+
+.s3-bulb-bg spline-viewer {
+  width: 100% !important;
+  height: 100% !important;
 }
 
 .s3-bulb-bg canvas {
@@ -232,7 +280,7 @@
     margin-left: 0;
   }
 
-  .s3-bulb-bg > div {
+  .s3-bulb-bg > div:not(.s3-bulb-skeleton) {
     left: 30%;     /* shift more to the right on mobile */
   }
 
