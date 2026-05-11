@@ -129,12 +129,6 @@ export default function Season3() {
 
       {/* ═══ FULL-BG SPLINE — scene shifted right ═══ */}
       <div className={`s3-bulb-bg ${splineReady ? 's3-bulb-loaded' : ''}`}>
-        {/* Skeleton placeholder while Spline loads */}
-        {!splineReady && (
-          <div className="s3-bulb-skeleton">
-            <div className="s3-bulb-skeleton-glow" />
-          </div>
-        )}
         {mountSpline && (
           <Suspense fallback={null}>
             <Spline
