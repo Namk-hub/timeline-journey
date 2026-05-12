@@ -46,7 +46,9 @@ const PROJECT_CARDS = [
   },
 ];
 
-function ProjectCard({ card }) {
+const FULL_CAROUSEL_CARDS = [...CAROUSEL_CARDS, ...CAROUSEL_CARDS];
+
+const ProjectCard = React.memo(function ProjectCard({ card }) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: false, margin: "-15% 0px -15% 0px" });
   const fromRight = card.from === 'right';
@@ -78,7 +80,7 @@ function ProjectCard({ card }) {
       </div>
     </motion.div>
   );
-}
+});
 
 export default function Season4() {
   const sectionRef = useRef(null);
@@ -124,8 +126,6 @@ export default function Season4() {
       );
   }, { scope: sectionRef });
 
-  const cards = [...CAROUSEL_CARDS, ...CAROUSEL_CARDS];
-
   return (
     <section className="s4-section" ref={sectionRef}>
 
@@ -154,7 +154,7 @@ export default function Season4() {
       {/* ═══ CAROUSEL ═══ */}
       <div className="s4-carousel">
         <div className="s4-carousel-track">
-          {cards.map((card, i) => (
+          {FULL_CAROUSEL_CARDS.map((card, i) => (
             <div className="s4-card" key={i}>
               <span className="s4-card-icon">{card.icon}</span>
               <span className="s4-card-label">{card.label}</span>
@@ -164,7 +164,7 @@ export default function Season4() {
       </div>
       <div className="s4-carousel s4-carousel-reverse">
         <div className="s4-carousel-track s4-carousel-track-reverse">
-          {cards.map((card, i) => (
+          {FULL_CAROUSEL_CARDS.map((card, i) => (
             <div className="s4-card" key={`r-${i}`}>
               <span className="s4-card-icon">{card.icon}</span>
               <span className="s4-card-label">{card.label}</span>
@@ -181,10 +181,11 @@ export default function Season4() {
 
         <div className="s4-projects-stack">
           {PROJECT_CARDS.map((card, i) => (
-            <ProjectCard key={i} card={card} index={i} />
+            <ProjectCard key={i} card={card} />
           ))}
         </div>
       </div>
+
 
     </section>
   );
